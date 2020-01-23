@@ -1,0 +1,15 @@
+sdk-version: 0.13.43
+name: o_beer
+version: 1.0.0
+source: daml/Main.daml
+scenario: Main:mainScenario
+parties:
+- Alice
+- Bob
+- Carol
+- Dave
+exposed-modules:
+- Main
+dependencies:
+- daml-prim
+- daml-stdlib

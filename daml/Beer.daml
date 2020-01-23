@@ -1,0 +1,65 @@
+daml 1.2
+module Beer where
+
+template BeerProposal
+  with
+    beer : Beer
+  where
+    signatory beer.giver
+    observer beer.recipient
+
+    choice Accept_Beer : ContractId Beer
+      controller beer.recipient
+        do
+          create beer
+
+template Beer
+  with
+    giver : Party
+    recipient : Party
+  where
+    signatory giver, recipient
+
+    choice Beer_Received : ()
+      controller recipient
+        do
+          pure ()
+
+test_beer = scenario do
+  both@[alice, carol] <- mapA getParty ["Alice", "Carol"]
+
+  -- Carol helps Alice out of a bind
+  -- Alice owes Carol a beer
+  beerProposal <- submit alice do
+    create BeerProposal with
+      beer = Beer with
+        giver = alice
+        recipient = carol
+
+  -- Later at the bar Carol asks Alice for the beer
+  -- "Haha, imagine if *they* found out" she adds
+  beer <- submit carol do
+    exercise beerProposal Accept_Beer
+
+  -- Carol records that she received the beer
+  submit carol do
+    exercise beer Beer_Received
+
+  -- They're now square. Alice hopes Carol keeps her word. 
+  -- But how can she trust her? Carol once framed Bob, 
+  -- and which "they" did she mean?
+
+  -- Alice gets home and needs to make sure Carol can't frame her, can't claim she owes her a beer when she doesn't.
+  -- She fires up her terminal, furiously she types
+
+  submitMustFail carol do
+    create BeerProposal with
+      beer = Beer with
+        giver = alice
+        recipient = carol
+
+  -- > Scenario execution failed on commit at Main:55:3:
+  -- > #0: create of Main:BeerProposal at DA.Internal.Prelude:372:26
+  -- > failed due to a missing authorization from 'Alice'
+
+  -- "Good, she won't get me"
