@@ -1,8 +1,9 @@
 <template>
   <div>
     <input :value="party" @input="updateParty">
-    <p> Party: {{party}}</p>
-    <p> Token: {{jwt_auth}}</p>
+    <router-link to="/" tag="button">Login</router-link>
+    <!-- <p>Party: {{party}}</p>
+    <p>Token: {{jwt_auth}}</p> -->
   </div>
 </template>
 
