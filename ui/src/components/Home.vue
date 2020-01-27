@@ -1,8 +1,6 @@
 <template>
   <div class="home-component">
-		TESTING HOME
 		{{parties}}
-		{{this.$store.root_url}}
   </div>
 </template>
 
@@ -21,7 +19,9 @@ export default {
 			ledger: null,
 		}
 	},
-	computed: mapState(['root_url', 'jwt_auth']),
+	computed: {
+		...mapState(['root_url', 'jwt_auth']),
+	},
 	mounted () {
 		this.ledger = axios.create({
 			baseURL: this.root_url,
