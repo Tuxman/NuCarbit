@@ -13,7 +13,7 @@ template User with
     ensure party `notElem` friends && dedupSort friends == friends
 
     key party: Party
-    maintainer party
+    maintainer key
 
     choice AddFriend: ContractId User with
         friend: Party
