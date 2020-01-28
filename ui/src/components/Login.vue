@@ -18,7 +18,7 @@ export default {
 
     }
   },
-  computed : {
+  computed: {
     ...mapState(['party', 'jwt_auth'])
   },
   methods: {
