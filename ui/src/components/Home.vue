@@ -5,12 +5,13 @@
     <input v-model.trim="recipient" />
     {{recipient}}
     {{newContract}}
+    <p>Offered Beers: {{beers}}</p>
   </div>
 </template>
 
 <script>
 import store from "../store";
-import { mapState } from "vuex";
+import { mapState, mapMutations } from "vuex";
 
 const axios = require("axios");
 
@@ -20,24 +21,33 @@ export default {
   data() {
     return {
       parties: null,
-      ledger: null,
       recipient: null,
-      newContract: null
+      newContract: null,
     };
   },
+  beforeCreated() {
+
+  },
+  created() {
+    // this.beerProposalQuery = {
+    //   templateIds: ["Beer:BeerProposal"],
+    //   query: {
+    //     beer: {
+    //       templateId: "Beer:Beer",
+    //       recipient: this.party
+    //     }
+    //   }
+    //   // query: {'beer.recipient': this.party}
+    // };
+    // this.ledger.get("/parties").then(request => (this.parties = request.data));
+  },
   computed: {
-    ...mapState(["root_url", "jwt_auth", "party"])
+    ...mapState(["root_url", "jwt_auth", "party", "beers", "ledger"]),
+    ...mapMutations(["updateBeers"])
   },
   mounted() {
-    this.ledger = axios.create({
-      baseURL: this.root_url,
-      timeout: 1000,
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: "Bearer " + this.jwt_auth
-      }
-    });
-    this.ledger.get("/parties").then(request => (this.parties = request.data));
+    this.$store.dispatch('getBeers')
+    this.$store.dispatch('getBeerProposals')
   },
   methods: {
     createContract: function() {
@@ -56,10 +66,19 @@ export default {
         try {
           this.newContract = request.data;
         } catch (err) {
-					console.error(err);
-				}
+          console.error(err);
+        }
       });
-    }
+    },
+  //   getContracts: function(query) {
+  //     this.ledger.post("/contracts/search", query).then(request => {
+  //       try {
+  //         return request.data;
+  //       } catch (err) {
+  //         console.error(err);
+  //       }
+  //     });
+  //   }
   }
 };
 </script>
