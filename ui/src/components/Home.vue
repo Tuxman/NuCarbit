@@ -5,6 +5,11 @@
     <input v-model.trim="recipient" />
     {{recipient}}
     {{newContract}}
+    <ul id="beerProposals">
+      <li v-for="bp in beerProposals" v-bind:key="bp.contractId">
+        Beer Proposal from: {{bp.payload.beer.giver}} | Accept: | Reject: 
+      </li>
+    </ul>
     <p>Offered Beers: {{beerProposals}}</p>
   </div>
 </template>

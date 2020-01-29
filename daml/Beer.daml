@@ -13,6 +13,11 @@ template BeerProposal
         do
           create beer
 
+    choice Reject_Beer : ()
+      controller beer.recipient
+        do
+          pure ()
+
 template Beer
   with
     giver : Party
