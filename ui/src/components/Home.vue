@@ -45,7 +45,7 @@ export default {
     // }.bind(this), 10000)
   },
   methods: {
-    createContract: function() {
+    createContract() {
       var query = {
         templateId: "Beer:BeerProposal",
         argument: {
@@ -64,8 +64,8 @@ export default {
           console.error(err);
         }
       });
-    },
-  }
+    }
+  },
 };
 </script>
 

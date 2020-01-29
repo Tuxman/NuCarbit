@@ -2,7 +2,7 @@
   <div>
     <input v-model="newParty">
     <router-link to="/" tag="button">
-      <span v-on:click="updateParty">Login</span>
+      <span v-on:click.once="updateParty">Login</span>
     </router-link>
     <!-- <p>Party: {{party}}</p>
     <p>Token: {{jwt_auth}}</p> -->

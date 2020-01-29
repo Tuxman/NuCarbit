@@ -66,6 +66,18 @@ export default new Vuex.Store({
 
       var beerProposals = await state.ledger.post("/contracts/search", query)
       commit('updateBeerProposals', beerProposals.data.result)
+    },
+    async exerciseChoice({ commit, state }, {templateId, contractId, choice, argument={}}) {
+      var query = {
+        templateId: templateId,
+        contractId: contractId,
+        choice: choice,
+        argument: argument
+      }
+
+      var response = await state.ledger.post("/command/exercise", query)
+
+      // TODO: Finish handling response and updating lists
     }
   },
   modules: {

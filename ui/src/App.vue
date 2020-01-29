@@ -5,7 +5,7 @@
       <div v-if="party">
         Logged in as {{party}} |
 
-        <button v-on:click="logoutParty()">Logout</button>
+        <button v-on:click.once="logoutParty()">Logout</button>
       </div>
       <router-link v-else to="/login">Login</router-link>
     </div>
