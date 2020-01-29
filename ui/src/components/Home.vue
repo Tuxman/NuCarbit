@@ -28,26 +28,29 @@ export default {
   beforeCreated() {
 
   },
-  created() {
-    // this.beerProposalQuery = {
-    //   templateIds: ["Beer:BeerProposal"],
-    //   query: {
-    //     beer: {
-    //       templateId: "Beer:Beer",
-    //       recipient: this.party
-    //     }
-    //   }
-    //   // query: {'beer.recipient': this.party}
-    // };
-    // this.ledger.get("/parties").then(request => (this.parties = request.data));
-  },
+  // created() {
+  //   // this.beerProposalQuery = {
+  //   //   templateIds: ["Beer:BeerProposal"],
+  //   //   query: {
+  //   //     beer: {
+  //   //       templateId: "Beer:Beer",
+  //   //       recipient: this.party
+  //   //     }
+  //   //   }
+  //   //   // query: {'beer.recipient': this.party}
+  //   // };
+  //   // this.ledger.get("/parties").then(request => (this.parties = request.data));
+  // },
   computed: {
     ...mapState(["root_url", "jwt_auth", "party", "beers", "ledger"]),
     ...mapMutations(["updateBeers"])
   },
   mounted() {
-    this.$store.dispatch('getBeers')
-    this.$store.dispatch('getBeerProposals')
+    // setInterval(function() {
+      console.log('Updating the beers...')
+      this.$store.dispatch('getBeers')
+      this.$store.dispatch('getBeerProposals')
+    // }.bind(this), 10000)
   },
   methods: {
     createContract: function() {

@@ -28,7 +28,7 @@ export default new Vuex.Store({
     ledger: axios.create(
       {
           baseURL: 'http://localhost:7575',
-          timeout: 1000,
+          timeout: 10000,
           headers: {
             "Content-Type": "application/json",
             // Authorization: "Bearer " + jwt_auth

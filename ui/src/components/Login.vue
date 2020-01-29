@@ -1,7 +1,9 @@
 <template>
   <div>
-    <input :value="party" @input="updateParty">
-    <router-link to="/" tag="button">Login</router-link>
+    <input v-model="newParty">
+    <router-link to="/" tag="button">
+      <span v-on:click="updateParty(newParty)">Login</span>
+    </router-link>
     <!-- <p>Party: {{party}}</p>
     <p>Token: {{jwt_auth}}</p> -->
   </div>
@@ -15,7 +17,7 @@ export default {
   store,
   data () {
     return {
-
+      newParty: null
     }
   },
   computed: {
@@ -23,8 +25,10 @@ export default {
   },
   methods: {
     // There is a less cumbersome way to do this over here: https://vuex.vuejs.org/guide/forms.html
-    updateParty(e) {
-      this.$store.commit('updateParty', e.target.value)
+    updateParty(party) {
+      if (party) {
+        this.$store.commit('updateParty', party)
+      }
     }
   }
 };
