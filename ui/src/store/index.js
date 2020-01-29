@@ -29,7 +29,13 @@ export default new Vuex.Store({
       var jwt_auth = jwt.sign(payload, 'secret');
       state.ledger.defaults.headers.common['Authorization'] = "Bearer " + jwt_auth;
     },
-
+    logoutParty (state) {
+      // There must be a better way to do this
+      state.party = null
+      state.ledger.defaults.headers.common['Authorization'] = "" // delete instead?
+      state.beers = null
+      state.beerProposals = null
+    },
     updateBeers(state, beers) {
       state.beers = beers
     },

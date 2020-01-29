@@ -4,9 +4,8 @@
       <router-link to="/">Home</router-link>|
       <div v-if="party">
         Logged in as {{party}} |
-        <router-link to="/">
-          <span v-on:click="updateParty(null)">Logout</span>
-        </router-link>
+
+        <button v-on:click="logoutParty()">Logout</button>
       </div>
       <router-link v-else to="/login">Login</router-link>
     </div>
@@ -16,18 +15,24 @@
 
 <script>
 import store from "./store";
-import { mapState } from "vuex";
+import { mapState, mapMutations } from "vuex";
 export default {
   name: "app",
   store,
   computed: {
-    ...mapState(["party"])
+    ...mapState(["party"]),
+    // ...mapMutations(["logoutParty"])
   },
   methods: {
     // There is a less cumbersome way to do this over here: https://vuex.vuejs.org/guide/forms.html
     updateParty(party) {
       if (party) {
         this.$store.commit("updateParty", party);
+      }
+    },
+    logoutParty() {
+      if (this.party) {
+        this.$store.commit("logoutParty")
       }
     }
   }
