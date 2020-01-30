@@ -3,9 +3,7 @@
     <div id="nav">
       <router-link to="/">Home</router-link> |
       <div v-if="party">
-        Logged in as {{party}} |
-
-        <button v-on:click.once="logoutParty()">Logout</button>
+        Logged in as {{party}} | <button v-on:click.once="logoutParty()">Logout</button>
       </div>
       <router-link v-else to="/login">Login</router-link>
     </div>
@@ -21,7 +19,6 @@ export default {
   store,
   computed: {
     ...mapState(["party"]),
-    // ...mapMutations(["logoutParty"])
   },
   methods: {
     // There is a less cumbersome way to do this over here: https://vuex.vuejs.org/guide/forms.html

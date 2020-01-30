@@ -14,7 +14,6 @@ export default new Vuex.Store({
     party : null,
     beersOwed: null,
     beerProposals: null,
-    // beersOffered: [],
     ledger: axios.create(
       {
           baseURL: 'http://localhost:7575',
@@ -66,7 +65,6 @@ export default new Vuex.Store({
         templateIds: ["Beer:BeerProposal"],
         query: {
           beer: {
-            // templateIds: ["Beer:Beer"],
             recipient: this.party
           }
         }
@@ -83,9 +81,7 @@ export default new Vuex.Store({
         argument: argument
       }
 
-      var response = await state.ledger.post("/command/exercise", query)
-
-      // TODO: Finish handling response and updating lists
+      await state.ledger.post("/command/exercise", query)
     },
     async createBeerProposal({commit, state}, recipient) {
       var query = {
@@ -101,8 +97,6 @@ export default new Vuex.Store({
 
       state.ledger.post("/command/create", query).then(request => {
         try {
-          // state.beersOffered.push(request.data)
-          // this.newContract = request.data;
         } catch (err) {
           console.error(err);
         }

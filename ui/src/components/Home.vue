@@ -3,8 +3,6 @@
     <div v-if="party">
       <input v-model.trim="recipient" />
       <button v-on:click="createBeerProposal">Give Beer</button>
-      <!-- {{recipient}} -->
-      <!-- {{newContract}} -->
       <ul id="beerProposals">
         <li v-for="bp in beerProposals" v-bind:key="bp.contractId.replace('#','').replace(':','.')">
           <span v-if="bp.payload.beer.recipient == party">
@@ -21,7 +19,6 @@
           Beer Owed from: {{bo.payload.giver}} | <button v-on:click.once="exerciseChoice(bo, 'Beer_Received')">Received</button>
         </li>
       </ul>
-      <!-- <p>Offered Beers: {{beerProposals}}</p> -->
     </div>
     <div v-else>
       Please <router-link to="/login">login</router-link>
@@ -52,8 +49,6 @@ export default {
     ...mapState(["root_url", "jwt_auth", "party", "beersOwed", "beerProposals", "ledger"]),
   },
   async mounted() {
-    // setInterval(function() {
-      // Make sure our user's auth header is setup if they're starting a new session
       if (this.party){
         console.log('Setting up the party...')
         await this.$store.dispatch('updateParty', this.party)
@@ -61,7 +56,6 @@ export default {
         await this.$store.dispatch('getBeersOwed')
         await this.$store.dispatch('getBeerProposals')
       }
-    // }.bind(this), 10000)
   },
   methods: {
     async createBeerProposal() {
@@ -71,7 +65,6 @@ export default {
     async exerciseChoice(contract, choice){
       var templateId = contract.templateId;
       var contractId = contract.contractId;
-      // var choice = "Accept_Beer"
       await this.$store.dispatch("exerciseChoice", {templateId, contractId, choice})
       await this.$store.dispatch('getBeerProposals')
       await this.$store.dispatch('getBeersOwed')
