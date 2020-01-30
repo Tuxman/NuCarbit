@@ -8,9 +8,9 @@ Vue.use(Vuex);
 export default new Vuex.Store({
   state: {
     party : null,
-    beers: null,
+    beersOwed: null,
     beerProposals: null,
-    beersOffered: [],
+    // beersOffered: [],
     ledger: axios.create(
       {
           baseURL: 'http://localhost:7575',
@@ -37,8 +37,8 @@ export default new Vuex.Store({
       state.beers = null
       state.beerProposals = null
     },
-    updateBeersOwed(state, beers) {
-      state.beers = beers
+    updateBeersOwed(state, beersOwed) {
+      state.beersOwed = beersOwed
     },
     updateBeerProposals(state, beerProposals) {
       state.beerProposals = beerProposals;
@@ -51,8 +51,8 @@ export default new Vuex.Store({
         query: { recipient: state.party }
       };
 
-      var beers = await state.ledger.post("/contracts/search", query);
-      commit('updateBeersOwed', beers.data)
+      var beersOwed = await state.ledger.post("/contracts/search", query);
+      commit('updateBeersOwed', beersOwed.data.result)
     },
     async getBeerProposals ({commit, state}) {
       var query = {
@@ -94,7 +94,7 @@ export default new Vuex.Store({
 
       state.ledger.post("/command/create", query).then(request => {
         try {
-          state.beersOffered.push(request.data)
+          // state.beersOffered.push(request.data)
           // this.newContract = request.data;
         } catch (err) {
           console.error(err);

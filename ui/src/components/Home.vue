@@ -2,20 +2,26 @@
   <div class="home-component">
     <div v-if="party">
       <input v-model.trim="recipient" />
-      <button v-on:click="createContract">Give Beer</button>
-      {{recipient}}
+      <button v-on:click="createBeerProposal">Give Beer</button>
+      <!-- {{recipient}} -->
       <!-- {{newContract}} -->
       <ul id="beerProposals">
-        <li v-for="bp in beerProposals" v-bind:key="bp.contractId">
-          Beer Proposal from: {{bp.payload.beer.giver}} | Accept: | Reject: 
+        <li v-for="bp in beerProposals" v-bind:key="bp.contractId.replace('#','').replace(':','.')">
+          <span v-if="bp.payload.beer.recipient == party">
+            Beer Proposal from: {{bp.payload.beer.giver}} | 
+            <button v-on:click.once="exerciseChoice(bp, 'Accept_Beer')">Accept</button> | Reject: 
+          </span>
+          <span v-else>
+            Beer Offered to: {{bp.payload.beer.recipient}} | Cancel: 
+          </span>
         </li>
       </ul>
-      <ul id="beersGiven">
-        <li v-for="bg in beers" v-bind:key="bg.contractId">
-          Beer Owed from: {{bg}}
+      <ul id="beersOwed">
+        <li v-for="bo in beersOwed" v-bind:key="bo.contractId">
+          Beer Owed from: {{bo.payload.giver}}
         </li>
       </ul>
-      <p>Offered Beers: {{beerProposals}}</p>
+      <!-- <p>Offered Beers: {{beerProposals}}</p> -->
     </div>
     <div v-else>
       Please <router-link to="/login">login</router-link>
@@ -43,7 +49,7 @@ export default {
 
   },
   computed: {
-    ...mapState(["root_url", "jwt_auth", "party", "beers", "beerProposals", "ledger"]),
+    ...mapState(["root_url", "jwt_auth", "party", "beersOwed", "beerProposals", "ledger"]),
   },
   mounted() {
     // setInterval(function() {
@@ -53,8 +59,17 @@ export default {
     // }.bind(this), 10000)
   },
   methods: {
-    async createContract() {
-      this.$store.dispatch("createContract", recipient)
+    async createBeerProposal() {
+      this.$store.dispatch("createBeerProposal", this.recipient)
+      this.$store.dispatch('getBeerProposals')
+    },
+    async exerciseChoice(contract, choice){
+      var templateId = contract.templateId;
+      var contractId = contract.contractId;
+      // var choice = "Accept_Beer"
+      this.$store.dispatch("exerciseChoice", {templateId, contractId, choice})
+      this.$store.dispatch('getBeerProposals')
+      this.$store.dispatch('getBeersOwed')
     }
   },
 };
