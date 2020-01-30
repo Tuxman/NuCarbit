@@ -1,39 +1,49 @@
 <template>
-  <div class="home-component">
-    <div v-if="party">
-      <input v-model.trim="recipient" />
-      <button v-on:click="createBeerProposal">Give Beer</button>
-      <b-list-group id="beerProposals">
-        <b-list-group-item v-for="bp in beerProposals" v-bind:key="bp.contractId.replace('#','').replace(':','.')">
-          <span v-if="bp.payload.beer.recipient == party">
-            Beer Proposal from: {{bp.payload.beer.giver}}
-            <b-button variant="primary" v-on:click.once="exerciseChoice(bp, 'Accept_Beer')">Accept</b-button>
-            <b-button variant="danger" v-on:click.once="exerciseChoice(bp, 'Reject_Beer')">Reject</b-button>
-          </span>
-          <span v-else>
-            Beer Offered to: {{bp.payload.beer.recipient}}
-            <b-button variant="danger" v-on:click.once="exerciseChoice(bp, 'Cancel_Beer')">Cancel</b-button>
-          </span>
-        </b-list-group-item>
-      </b-list-group>
-      <b-list-group id="beersOwed">
-        <b-list-group-item v-for="bo in beersOwed" v-bind:key="bo.contractId">
-          <span v-if="bo.payload.giver == party">Beer Owed to: {{bo.payload.recipient}}</span>
-          <span v-else>
-            Beer Owed from: {{bo.payload.giver}}
-            <b-button
-              variant="success"
-              v-on:click.once="exerciseChoice(bo, 'Beer_Received')"
-            >Received</b-button>
-          </span>
-        </b-list-group-item>
-      </b-list-group>
-    </div>
-    <div v-else>
+  <b-container class="home-component">
+    <span v-if="party">
+      <b-row>
+        <b-col>
+          <input v-model.trim="recipient" />
+          <b-button variant="primary" v-on:click="createBeerProposal" class="mx-1">Give Beer</b-button>
+        </b-col>
+      </b-row>
+      <b-row>
+        <b-col>
+          <b-list-group id="beerProposals">
+            <b-list-group-item v-for="bp in beerProposals" v-bind:key="bp.contractId.replace('#','').replace(':','.')">
+              <span v-if="bp.payload.beer.recipient == party">
+                Beer Proposal from: {{bp.payload.beer.giver}}
+                <b-button variant="primary" v-on:click.once="exerciseChoice(bp, 'Accept_Beer')" class="mx-1">Accept</b-button>
+                <b-button variant="danger" v-on:click.once="exerciseChoice(bp, 'Reject_Beer')">Reject</b-button>
+              </span>
+              <span v-else>
+                Beer Offered to: {{bp.payload.beer.recipient}}
+                <b-button variant="danger" v-on:click.once="exerciseChoice(bp, 'Cancel_Beer')">Cancel</b-button>
+              </span>
+            </b-list-group-item>
+          </b-list-group>
+        </b-col>
+        <b-col>
+          <b-list-group id="beersOwed">
+            <b-list-group-item v-for="bo in beersOwed" v-bind:key="bo.contractId">
+              <span v-if="bo.payload.giver == party">Beer Owed to: {{bo.payload.recipient}}</span>
+              <span v-else>
+                Beer Owed from: {{bo.payload.giver}}
+                <b-button
+                  variant="success"
+                  v-on:click.once="exerciseChoice(bo, 'Beer_Received')"
+                >Received</b-button>
+              </span>
+            </b-list-group-item>
+          </b-list-group>
+        </b-col>
+      </b-row>
+    </span>
+    <span v-else>
       Please
       <router-link to="/login">login</router-link>
-    </div>
-  </div>
+    </span>
+  </b-container>
 </template>
 
 <script>

@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <b-navbar id="nav">
-      <b-navbar-brand href="#"><code>O(Beer)</code></b-navbar-brand>
+      <b-navbar-brand href="#"><code>O(🍻)</code></b-navbar-brand>
 
       <b-navbar-nav>
         <b-nav-item><router-link to="/">Home</router-link></b-nav-item>
