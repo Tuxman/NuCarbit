@@ -10,6 +10,7 @@ export default new Vuex.Store({
     party : null,
     beers: null,
     beerProposals: null,
+    beersOffered: [],
     ledger: axios.create(
       {
           baseURL: 'http://localhost:7575',
@@ -36,7 +37,7 @@ export default new Vuex.Store({
       state.beers = null
       state.beerProposals = null
     },
-    updateBeers(state, beers) {
+    updateBeersOwed(state, beers) {
       state.beers = beers
     },
     updateBeerProposals(state, beerProposals) {
@@ -44,14 +45,14 @@ export default new Vuex.Store({
     }
   },
   actions: {
-    async getBeers ({commit, state}) {
+    async getBeersOwed ({commit, state}) {
       var query = {
         templateIds: ["Beer:Beer"],
         query: { recipient: state.party }
       };
 
       var beers = await state.ledger.post("/contracts/search", query);
-      commit('updateBeers', beers.data)
+      commit('updateBeersOwed', beers.data)
     },
     async getBeerProposals ({commit, state}) {
       var query = {
@@ -78,6 +79,27 @@ export default new Vuex.Store({
       var response = await state.ledger.post("/command/exercise", query)
 
       // TODO: Finish handling response and updating lists
+    },
+    async createBeerProposal({commit, state}, recipient) {
+      var query = {
+        templateId: "Beer:BeerProposal",
+        argument: {
+          beer: {
+            templateId: "Beer:Beer",
+            giver: state.party,
+            recipient: recipient
+          }
+        }
+      };
+
+      state.ledger.post("/command/create", query).then(request => {
+        try {
+          state.beersOffered.push(request.data)
+          // this.newContract = request.data;
+        } catch (err) {
+          console.error(err);
+        }
+      });
     }
   },
   modules: {
