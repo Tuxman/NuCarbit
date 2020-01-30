@@ -53,9 +53,14 @@ export default {
   },
   async mounted() {
     // setInterval(function() {
-      console.log('Updating the beers...')
-      await this.$store.dispatch('getBeersOwed')
-      await this.$store.dispatch('getBeerProposals')
+      // Make sure our user's auth header is setup if they're starting a new session
+      if (this.party){
+        console.log('Setting up the party...')
+        await this.$store.dispatch('updateParty', this.party)
+        console.log('Getting the beers...')
+        await this.$store.dispatch('getBeersOwed')
+        await this.$store.dispatch('getBeerProposals')
+      }
     // }.bind(this), 10000)
   },
   methods: {
