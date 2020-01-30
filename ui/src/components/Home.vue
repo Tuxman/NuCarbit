@@ -16,7 +16,12 @@
       </ul>
       <ul id="beersOwed">
         <li v-for="bo in beersOwed" v-bind:key="bo.contractId">
-          Beer Owed from: {{bo.payload.giver}} | <button v-on:click.once="exerciseChoice(bo, 'Beer_Received')">Received</button>
+          <span v-if="bo.payload.giver == party">
+            Beer Owed to: {{bo.payload.recipient}}
+          </span>
+          <span v-else>
+            Beer Owed from: {{bo.payload.giver}} | <button v-on:click.once="exerciseChoice(bo, 'Beer_Received')">Received</button>
+          </span>
         </li>
       </ul>
     </div>

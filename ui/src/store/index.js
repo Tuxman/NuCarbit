@@ -54,7 +54,9 @@ export default new Vuex.Store({
     async getBeersOwed ({commit, state}) {
       var query = {
         templateIds: ["Beer:Beer"],
-        query: { recipient: state.party }
+        query: { 
+          // recipient: state.party 
+        }
       };
 
       var beersOwed = await state.ledger.post("/contracts/search", query);
