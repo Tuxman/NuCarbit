@@ -27,7 +27,7 @@ export default {
     // There is a less cumbersome way to do this over here: https://vuex.vuejs.org/guide/forms.html
     async updateParty() {
       if (this.newParty) {
-        this.$store.commit('updateParty', this.newParty)
+        await this.$store.dispatch('updateParty', this.newParty)
       }
     }
   }

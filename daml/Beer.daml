@@ -18,6 +18,11 @@ template BeerProposal
         do
           pure ()
 
+    choice Cancel_Beer : ()
+      controller beer.giver
+        do
+          pure ()
+
 template Beer
   with
     giver : Party

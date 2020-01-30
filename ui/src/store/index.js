@@ -22,13 +22,9 @@ export default new Vuex.Store({
     )
   },
   mutations: {
-    updateParty (state, party) {
-      state.party = party;
-
-      var payload = {"ledgerId": "o_beer", "applicationId": "HTTP-JSON-API-Gateway", "party": party};
-
-      var jwt_auth = jwt.sign(payload, 'secret');
-      state.ledger.defaults.headers.common['Authorization'] = "Bearer " + jwt_auth;
+    loginParty(state, {party, authHeader}){
+      state.party = party
+      state.ledger.defaults.headers.common['Authorization'] = authHeader
     },
     logoutParty (state) {
       // There must be a better way to do this
@@ -45,6 +41,13 @@ export default new Vuex.Store({
     }
   },
   actions: {
+    async updateParty ({commit, state}, party) {
+      var payload = {"ledgerId": "o_beer", "applicationId": "HTTP-JSON-API-Gateway", "party": party};
+      var jwtAuth = jwt.sign(payload, 'secret');
+      var authHeader = "Bearer " + jwtAuth;
+
+      commit('loginParty', {party, authHeader});
+    },
     async getBeersOwed ({commit, state}) {
       var query = {
         templateIds: ["Beer:Beer"],
