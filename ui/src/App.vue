@@ -1,13 +1,24 @@
 <template>
   <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <div v-if="party">
-        Logged in as {{party}} | <button v-on:click.once="logoutParty()">Logout</button>
-      </div>
-      <router-link v-else to="/login">Login</router-link>
-    </div>
-    <router-view />
+    <b-navbar id="nav">
+      <b-navbar-brand href="#"><code>O(Beer)</code></b-navbar-brand>
+
+      <b-navbar-nav>
+        <b-nav-item><router-link to="/">Home</router-link></b-nav-item>
+      </b-navbar-nav>
+
+      <b-navbar-nav class="ml-auto">
+        <b-nav-item>
+          <div v-if="party">
+            Logged in as {{party}} <b-button variant="outline-danger" v-on:click.once="logoutParty()">Logout</b-button>
+          </div>
+          <router-link v-else to="/login">Login</router-link>
+        </b-nav-item>
+      </b-navbar-nav>
+    </b-navbar>
+    <b-container>
+      <router-view />
+    </b-container>
   </div>
 </template>
 
