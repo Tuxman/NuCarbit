@@ -7,6 +7,7 @@ template BeerProposal
   where
     signatory beer.giver
     observer beer.recipient
+    ensure beer.giver /= beer.recipient
 
     choice Accept_Beer : ContractId Beer
       controller beer.recipient
@@ -29,6 +30,7 @@ template Beer
     recipient : Party
   where
     signatory giver, recipient
+    ensure giver /= recipient
 
     choice Beer_Received : ()
       controller recipient
