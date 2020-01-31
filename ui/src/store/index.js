@@ -97,12 +97,13 @@ export default new Vuex.Store({
         }
       };
 
-      state.ledger.post("/command/create", query).then(request => {
-        try {
-        } catch (err) {
-          console.error(err);
-        }
-      });
+      try {
+        await state.ledger.post("/command/create", query);
+      }
+      catch (err) {
+        // TODO: Should throw an event and show a dialog box
+        console.log("Couldn't create contract " + err)
+      }
     }
   },
   modules: {
