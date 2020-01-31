@@ -1,10 +1,20 @@
 <template>
-  <div>
-    <input v-model="newParty">
-    <router-link to="/" tag="button">
-      <span v-on:click.once="updateParty">Login</span>
-    </router-link>
-  </div>
+  <b-container>
+    <b-row>
+      <b-col class="col-6 mx-auto">
+        <b-input-group>
+          <b-form-input v-model="newParty"></b-form-input>
+          <b-input-group-append>
+            <router-link to="/">
+              <b-button variant="primary" v-on:click.once="updateParty">
+                Login
+              </b-button>
+            </router-link>
+          </b-input-group-append>
+        </b-input-group>
+      </b-col>
+    </b-row>
+  </b-container>
 </template>
 
 <script>
