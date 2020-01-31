@@ -8,8 +8,12 @@
       </b-row>
       <b-row>
         <b-col class="my-3">
-          Give a beer to: <input v-model.trim="recipient" />
-          <b-button variant="primary" v-on:click="createBeerProposal" class="mx-1">Give {{recipient}} Beer</b-button>
+          <b-input-group prepend="Give a beer to">
+            <b-form-input v-model.trim="recipient" v-on:keyup.enter="createBeerProposal"></b-form-input>
+            <b-input-group-append>
+              <b-button variant="primary" v-on:click="createBeerProposal">Give {{recipient}} Beer</b-button>
+            </b-input-group-append>
+          </b-input-group>
         </b-col>
       </b-row>
       <b-row>
@@ -95,6 +99,8 @@ export default {
     async createBeerProposal() {
       await this.$store.dispatch("createBeerProposal", this.recipient);
       await this.$store.dispatch("getBeerProposals");
+
+      this.recipient=null;
     },
     async exerciseChoice(contract, choice) {
       var templateId = contract.templateId;
