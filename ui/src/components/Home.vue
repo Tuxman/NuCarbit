@@ -2,11 +2,6 @@
   <b-container class="home-component">
     <span v-if="party">
       <b-row>
-        <b-col>
-          <img alt="Vue logo" src="../assets/logo.png" class="img-fluid"/>
-        </b-col>
-      </b-row>
-      <b-row>
         <b-col class="my-3">
           <b-input-group prepend="Give a beer to">
             <b-form-input v-model.trim="recipient" v-on:keyup.enter="createBeerProposal"></b-form-input>

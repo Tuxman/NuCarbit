@@ -1,22 +1,32 @@
 <template>
   <div id="app">
     <b-navbar id="nav">
-      <b-navbar-brand href="#"><code>O(🍻)</code></b-navbar-brand>
+      <b-navbar-brand href="#">
+        <code>O(🍻)</code>
+      </b-navbar-brand>
 
       <b-navbar-nav>
-        <b-nav-item><router-link to="/">Home</router-link></b-nav-item>
+        <b-nav-item>
+          <router-link to="/">Home</router-link>
+        </b-nav-item>
       </b-navbar-nav>
 
       <b-navbar-nav class="ml-auto">
         <b-nav-item>
           <div v-if="party">
-            Logged in as {{party}} <b-button variant="outline-danger" v-on:click.once="logoutParty()">Logout</b-button>
+            Logged in as {{party}}
+            <b-button variant="outline-danger" v-on:click.once="logoutParty()">Logout</b-button>
           </div>
           <router-link v-else to="/login">Login</router-link>
         </b-nav-item>
       </b-navbar-nav>
     </b-navbar>
     <b-container>
+      <b-row>
+        <b-col>
+          <img alt="Vue logo" src="@/assets/logo.png" class="img-fluid" />
+        </b-col>
+      </b-row>
       <router-view />
     </b-container>
   </div>
@@ -29,7 +39,7 @@ export default {
   name: "app",
   store,
   computed: {
-    ...mapState(["party"]),
+    ...mapState(["party"])
   },
   methods: {
     // There is a less cumbersome way to do this over here: https://vuex.vuejs.org/guide/forms.html
@@ -40,7 +50,7 @@ export default {
     },
     logoutParty() {
       if (this.party) {
-        this.$store.commit("logoutParty")
+        this.$store.commit("logoutParty");
       }
     }
   }
