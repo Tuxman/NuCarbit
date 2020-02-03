@@ -10,7 +10,6 @@ parties:
 - Dave
 exposed-modules:
 - Beer
-- User
 dependencies:
 - daml-prim
 - daml-stdlib
