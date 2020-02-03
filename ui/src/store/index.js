@@ -6,6 +6,22 @@ import createPersistedState from "vuex-persistedstate";
 
 Vue.use(Vuex);
 
+// Figure out where the site is hosted from. Thanks Dimitri.
+const siteSubDomain = () => {
+  if (window.location.hostname === 'localhost') {
+      return 'http://localhost:7575';
+  }
+
+  let host = window.location.host.split('.')
+  const ledgerId = host[0];
+  let apiUrl = host.slice(1)
+  apiUrl.unshift('api')
+
+  return 'https://' + apiUrl.join('.') + (window.location.port ? ':' + window.location.port : '') + '/data/' + ledgerId;
+}
+
+const site = siteSubDomain();
+
 export default new Vuex.Store({
   plugins: [createPersistedState({
     paths:['party', 'ledger']
@@ -16,7 +32,7 @@ export default new Vuex.Store({
     beerProposals: null,
     ledger: axios.create(
       {
-          baseURL: 'http://localhost:7575',
+          baseURL: site,
           timeout: 10000,
           headers: {
             "Content-Type": "application/json",
