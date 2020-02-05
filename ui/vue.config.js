@@ -1,4 +1,7 @@
 module.exports = {
+		publicPath: process.env.NODE_ENV === 'production'
+		? '/o_beer_dist/'
+		: '/',
     configureWebpack: {
 			module: {
 				rules: [

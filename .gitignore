@@ -1,3 +1,4 @@
 .daml/
 *.log
 target/
+.DS_Store

@@ -12,12 +12,13 @@ const siteSubDomain = () => {
       return 'http://localhost:7575';
   }
 
-  let host = window.location.host.split('.')
-  const ledgerId = host[0];
-  let apiUrl = host.slice(1)
-  apiUrl.unshift('api')
+  return 'https://beer.woah.xyz';
+  // let host = window.location.host.split('.')
+  // const ledgerId = host[0];
+  // let apiUrl = host.slice(1)
+  // apiUrl.unshift('api')
 
-  return 'https://' + apiUrl.join('.') + (window.location.port ? ':' + window.location.port : '') + '/data/' + ledgerId;
+  // return 'https://' + apiUrl.join('.') + (window.location.port ? ':' + window.location.port : '') + '/data/' + ledgerId;
 }
 
 const site = siteSubDomain();
