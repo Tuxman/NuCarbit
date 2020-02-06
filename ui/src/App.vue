@@ -31,7 +31,54 @@
       <b-row class="my-5">
         <b-col>
           Frontend made with <a href="https://vuejs.org/">Vue.js</a>.
-          Backend made with <a href="https://docs.daml.com/index.html">DAML</a> in 32 lines of code.
+          Backend made with <a href="https://daml.com">DAML</a> in 32 lines of code.
+        </b-col>
+      </b-row>
+      <b-row class="my-5">
+        <b-col class="text-left">
+          <!-- <script src="https://gist.github.com/anthonylusardi-da/1a4c6a2e3c99f30e0a4043a6c80e09be.js"></script> -->
+          <pre>
+            <code class="daml">
+daml 1.2
+module Beer where
+
+template BeerProposal -- This is the template *for* a contract
+  with
+    beer : Beer
+  where
+    signatory beer.giver -- Signatories say who is needed to create an instantiated contract
+    observer beer.recipient -- Observers say who else can see the contract
+    ensure beer.giver /= beer.recipient -- Assure preconditions
+
+    choice Accept_Beer : ContractId Beer
+      controller beer.recipient -- Give different participants different choices
+        do
+          create beer -- Here the recipient of a proposal can choose to accept the beer contract
+
+    choice Reject_Beer : ()      -- Every choice consumes a contract (unless specified)
+      controller beer.recipient  -- so contracts are atomic and events are sequential
+        do
+          pure ()                -- This choice simply consumes the existing contract
+
+    choice Cancel_Beer : ()      -- Note how this choice is very similar to the previous
+      controller beer.giver
+        do
+          pure ()
+
+template Beer  -- Once the recipient does Accept_Beer in BeerProposal this contract is created
+  with
+    giver : Party
+    recipient : Party
+  where
+    signatory giver, recipient
+    ensure giver /= recipient
+
+    choice Beer_Received : ()  -- These are really just helper functions, this functionality is
+      controller recipient     -- equivalent to spending a UTXO or as DAML calls it, archiving a contract
+        do
+          pure ()
+            </code>
+          </pre>
         </b-col>
       </b-row>
     </b-container>
@@ -41,11 +88,19 @@
 <script>
 import store from "./store";
 import { mapState, mapMutations } from "vuex";
+import hljs from 'highlight.js/lib/highlight';
+import haskell from 'highlight.js/lib/languages/haskell';
+import 'highlight.js/styles/default.css'
+
 export default {
   name: "app",
   store,
   computed: {
     ...mapState(["party"])
+  },
+  created (){
+    hljs.initHighlightingOnLoad();
+    hljs.registerLanguage('daml', haskell)
   },
   methods: {
     // There is a less cumbersome way to do this over here: https://vuex.vuejs.org/guide/forms.html
