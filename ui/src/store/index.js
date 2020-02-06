@@ -12,7 +12,7 @@ const siteSubDomain = () => {
       return 'http://localhost:7575';
   }
 
-  return 'https://beer.woah.xyz';
+  return 'https://beerdb.woah.xyz';
   // let host = window.location.host.split('.')
   // const ledgerId = host[0];
   // let apiUrl = host.slice(1)

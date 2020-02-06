@@ -28,6 +28,12 @@
         </b-col>
       </b-row>
       <router-view />
+      <b-row class="my-5">
+        <b-col>
+          Frontend made with <a href="https://vuejs.org/">Vue.js</a>.
+          Backend made with <a href="https://docs.daml.com/index.html">DAML</a> in 32 lines of code.
+        </b-col>
+      </b-row>
     </b-container>
   </div>
 </template>
