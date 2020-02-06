@@ -36,13 +36,14 @@
       </b-row>
       <b-row class="my-5">
         <b-col class="text-left">
-          <!-- <script src="https://gist.github.com/anthonylusardi-da/1a4c6a2e3c99f30e0a4043a6c80e09be.js"></script> -->
+          <h3 class="text-center">This is the whole backend, database schema, json queries, business logic, everything that isn't the server</h3>
+          <h1 class="text-center">👇</h1>
           <pre>
-            <code class="daml">
+            <code class="daml bg-white">
 daml 1.2
 module Beer where
 
-template BeerProposal -- This is the template *for* a contract
+template BeerProposal -- This is the template for a contract. Akin to object and instance.
   with
     beer : Beer
   where
@@ -65,7 +66,7 @@ template BeerProposal -- This is the template *for* a contract
         do
           pure ()
 
-template Beer  -- Once the recipient does Accept_Beer in BeerProposal this contract is created
+template Beer  -- Once the recipient chooses to Accept_Beer in BeerProposal this contract is created
   with
     giver : Party
     recipient : Party
