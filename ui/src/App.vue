@@ -36,7 +36,7 @@
       </b-row>
       <b-row class="my-5">
         <b-col class="text-left">
-          <h3 class="text-center">This is the whole backend, database schema, json queries, business logic, everything that isn't the server</h3>
+          <h3 class="text-center">This is the whole backend, database schema, access control, json queries, business logic, everything that isn't the server</h3>
           <h1 class="text-center">👇</h1>
           <pre>
             <code class="daml bg-white">
