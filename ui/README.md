@@ -6,6 +6,7 @@ yarn install
 ```
 
 ### Compiles and hot-reloads for development
+Before running your local development server set `VUE_APP_LEDGER_URL=http://localhost:7575` in `ui/.env`
 ```
 yarn serve
 ```
@@ -15,15 +16,8 @@ yarn serve
 yarn build
 ```
 
-### Run your unit tests
+### Deploy to GitHub pages
+Before deploying to production set `VUE_APP_LEDGER_URL=myledger.host` in `ui/.env` to your json api end point
 ```
-yarn test:unit
+./deploy.sh git@github.com:<user>/<repo>.git master:gh-pages
 ```
-
-### Lints and fixes files
-```
-yarn lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
