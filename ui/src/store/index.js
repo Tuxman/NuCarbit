@@ -6,17 +6,6 @@ import createPersistedState from "vuex-persistedstate";
 
 Vue.use(Vuex);
 
-// Figure out where the site is hosted from. Thanks Dimitri.
-// const siteSubDomain = () => {
-//   if (window.location.hostname === 'localhost') {
-//       return 'http://localhost:7575';
-//   }
-
-//   return process.env.LEDGER_URL;
-// }
-
-// const site = process.env.LEDGER_URL;
-
 export default new Vuex.Store({
   plugins: [createPersistedState({
     paths:['party', 'ledger']
@@ -29,7 +18,7 @@ export default new Vuex.Store({
       {
           baseURL: process.env.NODE_ENV === 'production' ?
             process.env.VUE_APP_LEDGER_URL
-            : 'http://localhost:8080',
+            : window.location.origin,
           timeout: 10000,
           headers: {
             "Content-Type": "application/json",
