@@ -1,4 +1,11 @@
-#!/usr/bin/env sh
+#!/bin/bash
+
+die () {
+    echo >&2 "$@"
+    exit 1
+}
+
+[ "$#" -eq 2 ] || die "Specify deployment repo and branch (ex. git@github.com:user/repo.git master:gh-pages)"
 
 # abort on errors
 set -e
@@ -23,6 +30,6 @@ git commit -m 'deploy'
 # git push -f git@github.com:<USERNAME>/<USERNAME>.github.io.git master
 
 # if you are deploying to https://<USERNAME>.github.io/<REPO>
-git push -f git@github.com:anthonylusardi-da/o_beer_dist.git master:gh-pages
+git push -f "$1" "$2"
 
 cd -
