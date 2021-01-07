@@ -9,6 +9,8 @@
     "lint": "vue-cli-service lint"
   },
   "dependencies": {
+    "@daml/ledger": "^1.6.1",
+    "@daml/types": "^1.6.1",
     "acorn": "7.1.1",
     "axios": "^0.21.1",
     "bootstrap": "^4.5.0",
