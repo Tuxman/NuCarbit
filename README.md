@@ -11,9 +11,15 @@ We cannot accept external contributions to this repository (but can accept issue
 If you'd like to make changes to this project please create a fork of this repository.
 
 ## Prerequisites
-- [DAML SDK](https://docs.daml.com/getting-started/installation.html)
+- [Daml Connect](https://docs.daml.com/getting-started/installation.html)
 
-## Running
-1. Start the DAML sandbox and json-api endpoint with `./daml-start.sh` from the root directory
-1. Refer to the [README.md in `ui`](ui/README.md) to start the UI
-1. Enjoy
+## Building
+1. `daml build`
+1. `daml codegen js`
+1. Refer to the [README.md in `/ui`](ui/README.md) to start the UI
+
+## Running locally
+1. `daml sandbox --wall-clock-time --ledgerid o_beer $(ls -t .daml/dist/* | head -n1)`
+1. `daml json-api --ledger-host localhost --ledger-port 6865 \
+    --http-port 7575 --max-inbound-message-size 4194304 --package-reload-interval 5s \
+    --application-id HTTP-JSON-API-Gateway`
