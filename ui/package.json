@@ -9,6 +9,7 @@
     "lint": "vue-cli-service lint"
   },
   "dependencies": {
+    "@daml.js/o_beer-1.0.0": "./daml.js/o_beer-1.0.0/",
     "@daml/ledger": "^1.6.1",
     "@daml/types": "^1.6.1",
     "acorn": "7.1.1",

@@ -915,6 +915,17 @@
     lodash "^4.17.13"
     to-fast-properties "^2.0.0"
 
+"@daml.js/d14e08374fc7197d6a0de468c968ae8ba3aadbf9315476fd39071831f5923662@file:daml.js/d14e08374fc7197d6a0de468c968ae8ba3aadbf9315476fd39071831f5923662":
+  version "1.8.0"
+  dependencies:
+    "@mojotech/json-type-validation" "^3.1.0"
+
+"@daml.js/o_beer-1.0.0@./daml.js/o_beer-1.0.0/":
+  version "1.8.0"
+  dependencies:
+    "@daml.js/d14e08374fc7197d6a0de468c968ae8ba3aadbf9315476fd39071831f5923662" "file:../../../Library/Caches/Yarn/v6/npm-@daml-js-o-beer-1-0-0-1.8.0-146c2139-c0f9-453c-9e55-059e6202a00f-1610119533738/node_modules/@daml.js/d14e08374fc7197d6a0de468c968ae8ba3aadbf9315476fd39071831f5923662"
+    "@mojotech/json-type-validation" "^3.1.0"
+
 "@daml/ledger@^1.6.1":
   version "1.6.1"
   resolved "https://registry.yarnpkg.com/@daml/ledger/-/ledger-1.6.1.tgz#cd39bde22154502c7a4a8cc7060f0e9702fe48d8"
