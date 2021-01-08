@@ -23,19 +23,19 @@
                   {{bp.payload.beer.giver}} offered you a beer
                   <b-button
                     variant="primary"
-                    v-on:click.once="exerciseChoice(bp, 'Accept_Beer')"
+                    v-on:click.once="exerciseChoice(bp, obeer.Beer.BeerProposal.Accept_Beer)"
                     class="mx-1"
                   >Accept</b-button>
                   <b-button
                     variant="danger"
-                    v-on:click.once="exerciseChoice(bp, 'Reject_Beer')"
+                    v-on:click.once="exerciseChoice(bp, obeer.Beer.BeerProposal.Reject_Beer)"
                   >Reject</b-button>
                 </span>
                 <span v-else>
                   You offered {{bp.payload.beer.recipient}} a beer
                   <b-button
                     variant="danger"
-                    v-on:click.once="exerciseChoice(bp, 'Cancel_Beer')"
+                    v-on:click.once="exerciseChoice(bp, obeer.Beer.BeerProposal.Cancel_Beer)"
                   >Cancel</b-button>
                 </span>
               </b-list-group-item>
@@ -51,7 +51,7 @@
                   {{bo.payload.giver}} owes you a beer
                   <b-button
                     variant="success"
-                    v-on:click.once="exerciseChoice(bo, 'Beer_Received')"
+                    v-on:click.once="exerciseChoice(bo, obeer.Beer.Beer.Beer_Received)"
                   >Received</b-button>
                 </span>
               </b-list-group-item>
@@ -95,7 +95,8 @@ export default {
       "party",
       "beersOwed",
       "beerProposals",
-      "ledger"
+      "ledger",
+      "obeer"
     ])
   },
   async mounted() {
@@ -115,12 +116,10 @@ export default {
       this.recipient = null;
     },
     async exerciseChoice(contract, choice) {
-      var templateId = contract.templateId;
       var contractId = contract.contractId;
       await this.$store.dispatch("exerciseChoice", {
-        templateId,
-        contractId,
-        choice
+        choice,
+        contractId
       });
       await this.$store.dispatch("getBeerProposals");
       await this.$store.dispatch("getBeersOwed");

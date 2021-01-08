@@ -1,8 +1,10 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
 import jwt from "jsonwebtoken";
-import axios from "axios";
 import createPersistedState from "vuex-persistedstate";
+import { Choice, ContractId, Party, Template } from '@daml/types';
+import Ledger, { CreateEvent, Query, Stream, StreamCloseEvent, QueryResult } from '@daml/ledger';
+import * as obeer from '@daml.js/o_beer-1.0.0'
 
 Vue.use(Vuex);
 
@@ -14,32 +16,25 @@ export default new Vuex.Store({
     party : null,
     beersOwed: null,
     beerProposals: null,
-    ledger: axios.create(
-      {
-          baseURL: process.env.NODE_ENV === 'production' ?
-            process.env.VUE_APP_LEDGER_URL
-            : window.location.origin,
-          timeout: 10000,
-          headers: {
-            "Content-Type": "application/json",
-          }
-        }
-    )
+    ledger: null,
+    ledgerUrl: process.env.VUE_APP_LEDGER_URL,
+    obeer: obeer
   },
   mutations: {
-    loginParty(state, {party, authHeader}){
-      state.party = party
-      state.ledger.defaults.headers.common['Authorization'] = authHeader
+    loginParty(state, {party, token}){
+      state.party = party;
+      var ledgerUrl = state.ledgerUrl;
+      state.ledger = new Ledger({token, ledgerUrl, reconnectThreshold: 1337});
     },
     logoutParty (state) {
       // There must be a better way to do this
-      state.party = null
-      state.ledger.defaults.headers.common['Authorization'] = "" // delete instead?
-      state.beers = null
-      state.beerProposals = null
+      state.party = null;
+      state.ledger = null;
+      state.beers = null;
+      state.beerProposals = null;
     },
     updateBeersOwed(state, beersOwed) {
-      state.beersOwed = beersOwed
+      state.beersOwed = beersOwed;
     },
     updateBeerProposals(state, beerProposals) {
       state.beerProposals = beerProposals;
@@ -47,26 +42,35 @@ export default new Vuex.Store({
   },
   actions: {
     async updateParty ({commit, state}, party) {
-      var payload = {"ledgerId": "o_beer", "applicationId": "HTTP-JSON-API-Gateway", "party": party};
-      var jwtAuth = jwt.sign(payload, 'secret');
-      var authHeader = "Bearer " + jwtAuth;
+      var token = null;
 
-      commit('loginParty', {party, authHeader});
+      if (typeof process.env.VUE_APP_TOKEN === 'undefined' || process.env.VUE_APP_TOKEN === null){
+        // Local devmode
+        var payload = {
+          "https://daml.com/ledger-api": {
+            "ledgerId": "o_beer",
+            "applicationId": "HTTP-JSON-API-Gateway",
+            "actAs": [party]
+          }
+        };
+        token = jwt.sign(payload, 'secret');
+      } else {
+        token = process.env.VUE_APP_TOKEN;
+      }
+
+      commit('loginParty', {party, token});
     },
     async getBeersOwed ({commit, state}) {
       var query = {
-        templateIds: ["Beer:Beer"],
-        query: { 
-          // recipient: state.party 
-        }
+        templateId: "Beer:Beer"
       };
 
-      var beersOwed = await state.ledger.post("/contracts/search", query);
-      commit('updateBeersOwed', beersOwed.data.result)
+      var beersOwed = await state.ledger.query(obeer.Beer.Beer);
+      commit('updateBeersOwed', beersOwed)
     },
     async getBeerProposals ({commit, state}) {
       var query = {
-        templateIds: ["Beer:BeerProposal"],
+        templateId: "Beer:BeerProposal",
         query: {
           beer: {
             recipient: this.party
@@ -74,33 +78,23 @@ export default new Vuex.Store({
         }
       };
 
-      var beerProposals = await state.ledger.post("/contracts/search", query)
-      commit('updateBeerProposals', beerProposals.data.result)
+      var beerProposals = await state.ledger.query(obeer.Beer.BeerProposal);
+      commit('updateBeerProposals', beerProposals)
     },
-    async exerciseChoice({ commit, state }, {templateId, contractId, choice, argument={}}) {
-      var query = {
-        templateId: templateId,
-        contractId: contractId,
-        choice: choice,
-        argument: argument
-      }
-
-      await state.ledger.post("/command/exercise", query)
+    async exerciseChoice({ commit, state }, {choice, contractId, argument={}}) {
+      await state.ledger.exercise(choice, contractId, argument);
     },
     async createBeerProposal({commit, state}, recipient) {
-      var query = {
-        templateId: "Beer:BeerProposal",
-        argument: {
+      var payload = {
           beer: {
-            templateId: "Beer:Beer",
+            templateId: obeer.Beer.Beer,
             giver: state.party,
             recipient: recipient
           }
-        }
-      };
+        };
 
       try {
-        await state.ledger.post("/command/create", query);
+        await state.ledger.create(obeer.Beer.BeerProposal, payload);
       }
       catch (err) {
         // TODO: Should throw an event and show a dialog box
