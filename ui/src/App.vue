@@ -89,9 +89,10 @@ template Beer  -- Once the recipient chooses to Accept_Beer in BeerProposal this
 <script>
 import store from "./store";
 import { mapState, mapMutations } from "vuex";
-import hljs from 'highlight.js/lib/highlight';
 import haskell from 'highlight.js/lib/languages/haskell';
 import 'highlight.js/styles/default.css'
+
+import * as hljs from "highlight.js";
 
 export default {
   name: "app",
