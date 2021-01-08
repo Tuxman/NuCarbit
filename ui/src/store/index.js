@@ -48,7 +48,7 @@ export default new Vuex.Store({
         // Local devmode
         var payload = {
           "https://daml.com/ledger-api": {
-            "ledgerId": "o_beer",
+            "ledgerId": process.env.VUE_APP_LEDGER_ID,
             "applicationId": "HTTP-JSON-API-Gateway",
             "actAs": [party]
           }
