@@ -61,23 +61,10 @@ export default new Vuex.Store({
       commit('loginParty', {party, token});
     },
     async getBeersOwed ({commit, state}) {
-      var query = {
-        templateId: "Beer:Beer"
-      };
-
       var beersOwed = await state.ledger.query(obeer.Beer.Beer);
       commit('updateBeersOwed', beersOwed)
     },
     async getBeerProposals ({commit, state}) {
-      var query = {
-        templateId: "Beer:BeerProposal",
-        query: {
-          beer: {
-            recipient: this.party
-          }
-        }
-      };
-
       var beerProposals = await state.ledger.query(obeer.Beer.BeerProposal);
       commit('updateBeerProposals', beerProposals)
     },
