@@ -3,10 +3,10 @@
     <span v-if="party">
       <b-row>
         <b-col class="my-3">
-          <b-input-group prepend="Give a beer to">
+          <b-input-group prepend="Offer a beer to">
             <b-form-input v-model.trim="recipient" v-on:keyup.enter="createBeerProposal"></b-form-input>
             <b-input-group-append>
-              <b-button variant="primary" v-on:click="createBeerProposal">Give {{recipient}} Beer</b-button>
+              <b-button variant="primary" v-on:click="createBeerProposal">Offer {{recipient}} a beer</b-button>
             </b-input-group-append>
           </b-input-group>
         </b-col>
