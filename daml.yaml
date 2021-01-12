@@ -16,5 +16,3 @@ codegen:
   js:
     output-directory: ui/daml.js
     npm-scope: daml.js
-sandbox-options:
-  - --contract-id-seeding=strong
