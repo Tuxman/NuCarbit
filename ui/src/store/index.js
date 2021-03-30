@@ -4,7 +4,7 @@ import jwt from "jsonwebtoken";
 import createPersistedState from "vuex-persistedstate";
 import { Choice, ContractId, Party, Template } from '@daml/types';
 import Ledger, { CreateEvent, Query, Stream, StreamCloseEvent, QueryResult } from '@daml/ledger';
-import * as obeer from '@daml.js/o_beer-1.0.0'
+import * as obeer from '@daml.js/o-beer-1.0.0'
 
 Vue.use(Vuex);
 

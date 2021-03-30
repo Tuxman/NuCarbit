@@ -5,3 +5,4 @@ target/
 .env
 ui/src/daml.js
 *.png
+.vscode

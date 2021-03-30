@@ -1,4 +1,4 @@
-# o_beer
+# o-beer
 
 ## Project setup
 ```
