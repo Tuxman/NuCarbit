@@ -1,17 +1,15 @@
 <template>
-  <div class="home">
-    <Home/>
-  </div>
+  <TreeGreeting />
 </template>
 
 <script>
-// @ is an alias to /src
-import Home from '@/components/Home.vue';
+  import TreeGreeting from '../components/TreeGreeting.vue'
 
-export default {
-  name: 'home',
-  components: {
-    Home,
-  },
-};
+  export default {
+    name: 'Home',
+
+    components: {
+      TreeGreeting,
+    },
+  }
 </script>

@@ -1,10 +1,12 @@
 module.exports = {
-		devServer: {
-			proxy: process.env.VUE_APP_LEDGER_URL
-		},
-		publicPath: process.env.NODE_ENV === 'production'
-		? '/o_beer_dist/'
-		: '/',
+    // devServer: {
+    //     proxy: process.env.VUE_APP_LEDGER_URL
+    // },
+
+    publicPath: process.env.NODE_ENV === 'production'
+    ? '/nucarbit_dist/'
+    : '/',
+
     configureWebpack: {
 			module: {
 				rules: [
@@ -21,5 +23,9 @@ module.exports = {
 					},
 				],
 			}
-  }
+  },
+
+    transpileDependencies: [
+      'vuetify'
+    ]
 }

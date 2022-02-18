@@ -1,5 +1,5 @@
 sdk-version: 1.11.1
-name: o-beer
+name: nucarbit
 version: 1.0.0
 source: daml
 parties:

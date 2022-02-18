@@ -19,5 +19,5 @@ If you'd like to make changes to this project please create a fork of this repos
 1. Refer to the [README.md in `/ui`](ui/README.md) to start the UI
 
 ## Running locally
-1. `daml sandbox --wall-clock-time --ledgerid o_beer $(ls -t .daml/dist/* | head -n1)`
+1. `daml sandbox --wall-clock-time --ledgerid nucarbit $(ls -t .daml/dist/* | head -n1)`
 1. `daml json-api --ledger-host localhost --ledger-port 6865 --http-port 7575 --max-inbound-message-size 4194304 --package-reload-interval 5s --application-id HTTP-JSON-API-Gateway --allow-insecure-tokens`
