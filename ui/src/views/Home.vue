@@ -1,15 +1,18 @@
 <template>
-  <TreeGreeting />
+  <v-container>
+    <TreeGreeting/>
+    <Bifrost/>
+  </v-container>
 </template>
 
 <script>
-  import TreeGreeting from '../components/TreeGreeting.vue'
-
-  export default {
-    name: 'Home',
-
-    components: {
-      TreeGreeting,
-    },
+import TreeGreeting from '../components/TreeGreeting.vue'
+import Bifrost from '../components/Bifrost.vue'
+export default {
+  name: "home",
+  components: {
+    TreeGreeting,
+    Bifrost
   }
+}
 </script>
