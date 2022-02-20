@@ -77,9 +77,12 @@
               label="Country"
               v-model="carbonData.country"
               ></v-text-field>
-              <v-btn @click="mintData(carbonData.date,carbonData.projectName,carbonData.projectDeveloper,carbonData.projectType,carbonData.methodology,carbonData.creditsIssued,carbonData.address,carbonData.assetState,carbonData.country)">Mint</v-btn>
-              {{ this.$store.state.carbonDataArr }}
-              {{ this.carbonData.projectName }}
+              <v-btn @click="mockMint()">
+                mint
+              </v-btn>
+              <!-- <v-btn @click="mintData(carbonData.date,carbonData.projectName,carbonData.projectDeveloper,carbonData.projectType,carbonData.methodology,carbonData.creditsIssued,carbonData.address,carbonData.assetState,carbonData.country)">Mint</v-btn> --> 
+              <!-- {{ this.$store.state.carbonDataArr }}
+              {{ this.carbonData.projectName }} -->
             </v-form>
           </v-col>
         </v-row>
@@ -89,12 +92,15 @@
 </template>
 
 <script>
+import axios from 'axios'
+
 export default {
   name: 'CarbonDataForm',
   data() {
     return {
       // radioDateGroup: 'year'
-      carbonData: Object.assign(this.carbonDataObj)
+      carbonData: Object.assign(this.carbonDataObj),
+      transaction: ''
     }
   },
   methods: {
@@ -113,6 +119,10 @@ export default {
     // }
     mintData(carbonData) {
       this.$store.commit('mint', carbonData)
+    },
+
+    async mockMint() {
+      this.transaction = await axios.get('http://localhost:8000/mint')
     }
   },
   beforeCreate() {

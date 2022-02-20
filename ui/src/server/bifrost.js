@@ -38,14 +38,35 @@ app.get('/init', (req, res) => {
 
 app.get('/mint', (req, res) => {
 
+  brambl = new BramblJS({
+    KeyManager: new BramblJS.KeyManager({
+      network: 'private',
+      password: 'test',
+      keyFile: {
+        "crypto": {
+          "mac": "2377P8eRGhGPWCi18qBxpoNeWjmSmFxa5SjirffMxEH7",
+          "kdf": "scrypt",
+          "cipherText": "2txz2BXpCpgCe6xVksCUvSNVoCdRYDnH6n9qoJn5RRWNn1V4XsaeicsjDu2oMU1QsZdqdxbk4g3insDC5cCeK4w6",
+          "kdfSalt": "4efQbFkNkBMnHaF4EhUiBFVSyoFUQ5GuTFpurKpHiki6",
+          "cipher": "aes-256-ctr",
+          "cipherParams": {
+            "iv": "4rjExon4jG8KcRvftZW3i5"
+          }
+        },
+        "address": "AU9avKWiVVPKyU9LoMqDpduS4knoLDMdPEK54qKDNBpdnAMwQZcS"
+      }
+    })
+  })
+
   const address = brambl.keyManager.address
+  const assetCode = brambl.createAssetCode('test')
 
   const rawAssetParams = {
     "propositionType": "PublicKeyCurve25519",
     "recipients": [
       // basic: [address, quantity]
       // advance: [address, quantity, securityRoot, metadata]
-      [address, 2, '11111111111111111111111111111111', 'testData'],
+      [address, 1, '11111111111111111111111111111111', 'testData'],
     ],
     "assetCode": assetCode,
     "sender": [address],
@@ -57,6 +78,13 @@ app.get('/mint', (req, res) => {
     "fee": 1
   }
 
+  const tx = brambl.transaction('createRawAssetTransfer', rawAssetParams)
+  .then(res => { console.log('Unconfirmed transaction'); console.log(res); return res })
+  .then(res => brambl.pollTx(res.result.txHash))
+  .then(res => { console.log('\nConfirmed transaction'); console.log(res); return res })
+  .catch(console.log)
+
+  res.send(tx)
 })
 
 app.get('/balances', (req, res) => {

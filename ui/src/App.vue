@@ -74,7 +74,7 @@ export default {
             appName: "Nucarbit", // Required
             infuraId: "a40f9cbe88ee4758ab51b0682175e7b8", // Required unless you provide a JSON RPC url; see `rpc` below
             // rpc: "", // Optional if `infuraId` is provided; otherwise it's required
-            chainId: 1, // Optional. It defaults to 1 if not provided
+            chainId: 4, // Optional. It defaults to 1 if not provided
             appLogoUrl: null, // Optional. Application logo image URL. favicon is used if unspecified
             darkMode: false, // Optional. Use dark theme, defaults to false
           },
