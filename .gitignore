@@ -4,5 +4,4 @@ target/
 .DS_Store
 .env
 ui/src/daml.js
-*.png
 .vscode

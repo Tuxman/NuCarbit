@@ -16,27 +16,26 @@
           />
         </v-btn>
       <v-spacer></v-spacer>
-      <div class="justify-end">
-        <v-btn
-          to="CarbonDataForm"
-          text
-        >
-          <span class="mr-2">Data</span>
-        </v-btn>
-        <v-btn
-          to="AssetCard"
-          text
-        >
-          <span class="mr-2">AssetCard</span>
-        </v-btn>
-      </div>
+        <div>
+          <v-btn
+            to="CarbonDataForm"
+            text
+          >
+            <span class="mr-2">Data</span>
+          </v-btn>
+          <v-btn
+            to="AssetCard"
+            text
+          >
+            <span class="mr-2">AssetCard</span>
+          </v-btn>
+        </div>
       </div>
     </v-app-bar>
     <v-main>
       <router-view/>
     </v-main>
   <v-footer
-      color="brown"
       padless
     >
       <v-row

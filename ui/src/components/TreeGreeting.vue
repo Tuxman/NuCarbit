@@ -1,22 +1,16 @@
 <template>
   <v-row justify="center">
-    <v-col cols="10" class="d-flex justify-center">
+    <v-col class="d-flex justify-center">
       <v-card>
         <v-img 
         src="@/assets/tree-background.jpg"
-        class="white--text d-flex">
+        class="white--text mt-n3 mx-n18">
           <v-row>
-            <v-col cols="6">
-              <v-card
-              class="ma-6 d-flex"
-              max-width="400px"
-              >
-                <v-card-text
-                class="d-flex justify-center"
-                >
-                Welcome to NuCarbit
-                </v-card-text>
-              </v-card>
+            <v-col>
+              <SolutionSummary class="mt-16"/>
+              <FirstCardGroup/>
+              <TechSummary/>
+              <SecondCardGroup/>
             </v-col>
           </v-row>
         </v-img>
@@ -26,7 +20,17 @@
 </template>
 
 <script>
+import SolutionSummary from '../components/SolutionSummary.vue'
+import FirstCardGroup from '../components/FirstCardGroup.vue'
+import TechSummary from '../components/TechSummary.vue'
+import SecondCardGroup from '../components/SecondCardGroup.vue'
+
 export default {
-  
+  components: {
+    SolutionSummary,
+    FirstCardGroup,
+    TechSummary,
+    SecondCardGroup
+  },
 }
 </script>

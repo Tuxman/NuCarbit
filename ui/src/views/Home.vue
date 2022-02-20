@@ -1,5 +1,7 @@
 <template>
-  <TreeGreeting />
+  <v-container>
+    <TreeGreeting />
+  </v-container>
 </template>
 
 <script>
@@ -7,9 +9,8 @@
 
   export default {
     name: 'Home',
-
     components: {
-      TreeGreeting,
+      TreeGreeting
     },
   }
 </script>

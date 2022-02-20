@@ -77,8 +77,9 @@
               label="Country"
               v-model="carbonData.country"
               ></v-text-field>
-              <v-btn @click="mint()">Mint</v-btn>
+              <v-btn @click="mintData(carbonData.date,carbonData.projectName,carbonData.projectDeveloper,carbonData.projectType,carbonData.methodology,carbonData.creditsIssued,carbonData.address,carbonData.assetState,carbonData.country)">Mint</v-btn>
               {{ this.$store.state.carbonDataArr }}
+              {{ this.carbonData.projectName }}
             </v-form>
           </v-col>
         </v-row>
@@ -93,23 +94,39 @@ export default {
   data() {
     return {
       // radioDateGroup: 'year'
-      carbonData: {
-        menu: false,
-        date: (new Date(Date.now() - (new Date()).getTimezoneOffset() * 60000)).toISOString().substr(0, 10),
-        projectName: '',
-        projectDeveloper: '',
-        projectType: '',
-        methodology: '',
-        creditsIssued: '',
-        address: '',
-        state: '',
-        country: ''
-      }
+      carbonData: Object.assign(this.carbonDataObj)
     }
   },
   methods: {
-    mint() {
-      this.$store.commit('mint', this.carbonData)
+    // mint(date, projectName, projectDeveloper, projectType, methodology, creditsIssued, address, assetState, country) {
+    //   this.$store.dispatch('mint', {
+    //     date: date,
+    //     projectName: projectName,
+    //     projectDeveloper: projectDeveloper,
+    //     projectType: projectType,
+    //     methodology: methodology,
+    //     creditsIssued: creditsIssued,
+    //     address: address,
+    //     assetState: assetState,
+    //     country: country
+    //   })
+    // }
+    mintData(carbonData) {
+      this.$store.commit('mint', carbonData)
+    }
+  },
+  beforeCreate() {
+    this.carbonDataObj = {
+      menu: false,
+      date: (new Date(Date.now() - (new Date()).getTimezoneOffset() * 60000)).toISOString().substr(0, 10),
+      projectName: '',
+      projectDeveloper: '',
+      projectType: '',
+      methodology: '',
+      creditsIssued: '',
+      address: '',
+      assetState: '',
+      country: ''
     }
   }
 }
