@@ -2,7 +2,7 @@ import Vue from 'vue';
 import VueRouter from 'vue-router';
 import Home from '../views/Home.vue';
 import CarbonDataForm from '../components/CarbonDataForm.vue';
-import AssetCard from '../components/AssetCard.vue';
+import Credits from '../components/Credits.vue';
 
 Vue.use(VueRouter);
 
@@ -18,9 +18,9 @@ const routes = [
     component: CarbonDataForm,
   },
   {
-    path: '/AssetCard',
-    name: 'asset-card',
-    component: AssetCard,
+    path: '/Credits',
+    name: 'credits-card',
+    component: Credits,
   },
 ];
 

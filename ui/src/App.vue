@@ -1,10 +1,6 @@
 <template>
   <v-app color="#FEFAE0">
-    <v-app-bar
-      app
-      color="primary"
-      prominent
-    >
+    <v-app-bar app color="primary" prominent>
       <div class="d-flex align-center">
         <v-btn to="/" text class="ma-4" width="240px" height="80px">
           <v-img
@@ -15,33 +11,24 @@
             width="160px"
           />
         </v-btn>
-      <v-spacer></v-spacer>
+        <v-spacer></v-spacer>
         <div>
-          <v-btn
-            to="CarbonDataForm"
-            text
-          >
+          <v-btn to="CarbonDataForm" text>
             <span class="mr-2">Data</span>
           </v-btn>
-          <v-btn
-            to="AssetCard"
-            text
-          >
-            <span class="mr-2">AssetCard</span>
+          <v-btn to="credits" text>
+            <span class="mr-2">Credits</span>
           </v-btn>
+          <!-- <Connect /> -->
+          <v-btn text @click="connect()"> Connect </v-btn>
         </div>
       </div>
     </v-app-bar>
     <v-main>
-      <router-view/>
+      <router-view />
     </v-main>
-  <v-footer
-      padless
-    >
-      <v-row
-        justify="center"
-        no-gutters
-      >
+    <v-footer padless>
+      <v-row justify="center" no-gutters>
         <v-btn
           v-for="link in links"
           :key="link"
@@ -52,10 +39,7 @@
         >
           {{ link }}
         </v-btn>
-        <v-col
-          class="grey darken-4 py-4 text-center white--text"
-          cols="12"
-        >
+        <v-col class="grey darken-4 py-4 text-center white--text" cols="12">
           {{ new Date().getFullYear() }} — <strong>Vuetify</strong>
         </v-col>
       </v-row>
@@ -64,14 +48,51 @@
 </template>
 
 <script>
+import WalletLink from 'walletlink'
+import Web3 from 'web3'
+import Web3Modal from 'web3modal'
+
 export default {
-  name: 'App',
+  name: "App",
+
+  components: {
+  },
+
   data() {
     return {
-      link: [
-        
-      ]
-    }
-  }
-}
+      link: [],
+      web3: {},
+    };
+  },
+
+  methods: {
+    connect() {
+      const providerOptions = {
+        walletlink: {
+          package: WalletLink, // Required
+          options: {
+            appName: "Nucarbit", // Required
+            infuraId: "a40f9cbe88ee4758ab51b0682175e7b8", // Required unless you provide a JSON RPC url; see `rpc` below
+            // rpc: "", // Optional if `infuraId` is provided; otherwise it's required
+            chainId: 1, // Optional. It defaults to 1 if not provided
+            appLogoUrl: null, // Optional. Application logo image URL. favicon is used if unspecified
+            darkMode: false, // Optional. Use dark theme, defaults to false
+          },
+        },
+      };
+
+      const web3Modal = new Web3Modal({
+        network: "rinkeby",
+        cacheProvider: true,
+        providerOptions,
+      });
+
+      const provider = web3Modal.connect();
+
+      const web3 = new Web3(provider);
+
+      this.web3 = web3
+    },
+  },
+};
 </script>

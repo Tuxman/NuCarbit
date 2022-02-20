@@ -5,8 +5,10 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
   state() {
-    return {
-      carbonDataArr: [],
+    // return {
+      // web3: {},
+      // ethereum: {},
+      // carbonDataArr: [],
       // carbonData: {
       //   date: '',
       //   projectName: '',
@@ -18,7 +20,8 @@ export default new Vuex.Store({
       //   assetState: '',
       //   country: ''
       // }
-    }
+    // }
+    carbonDataArr: []
   },
   mutations: {
     mint: (state, payload) => {
@@ -32,7 +35,7 @@ export default new Vuex.Store({
       // Vue.set(state.carbonData, 'assetState', payload.assetState)
       // Vue.set(state.carbonData, 'country', payload.country)
       state.carbonDataArr.push(payload)
-    }
+    },
   },
   actions: {
     mint: (context, payload) => {

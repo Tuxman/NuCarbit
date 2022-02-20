@@ -1,39 +1,35 @@
 
 <template>
-  <v-container>
-    <v-btn @click="connect()"> Connect </v-btn>
-  </v-container>
+  <v-btn @click="connect()"> Connect </v-btn>
 </template>
 
 <script>
-import coinbaseWallet from "../utils/coinbaseWallet";
+import WalletLink from 'walletlink'
+import Web3 from 'web3'
 
 export default {
   methods: {
-    connect() {
-      const providerOptions = {
-        walletlink: {
-          package: WalletLink, // Required
-          options: {
-            appName: "Nucarbit", // Required
-            infuraId: "a40f9cbe88ee4758ab51b0682175e7b8", // Required unless you provide a JSON RPC url; see `rpc` below
-            // rpc: "", // Optional if `infuraId` is provided; otherwise it's required
-            chainId: 4, // Optional. It defaults to 1 if not provided
-            appLogoUrl: null, // Optional. Application logo image URL. favicon is used if unspecified
-            darkMode: false, // Optional. Use dark theme, defaults to false
-          },
-        },
-      };
+    connect () {
 
-      const web3Modal = new Web3Modal({
-        network: "rinkeby",
-        cacheProvider: true,
-        providerOptions,
-      });
+const APP_NAME = 'NuCarbit'
+const APP_LOGO_URL = ''
+const DEFAULT_ETH_JSONRPC_URL = 'https://mainnet.infura.io/v3/a40f9cbe88ee4758ab51b0682175e7b8'
+const DEFAULT_CHAIN_ID = 4
 
-      const provider = web3Modal.connect();
+// Initialize WalletLink
+const walletLink = new WalletLink({
+  appName: APP_NAME,
+  appLogoUrl: APP_LOGO_URL,
+  darkMode: false
+})
 
-      const web3 = new Web3(provider);
+// Initialize a Web3 Provider object
+const ethereum = walletLink.makeWeb3Provider(DEFAULT_ETH_JSONRPC_URL, DEFAULT_CHAIN_ID)
+
+// Initialize a Web3 object
+const web3 = new Web3(ethereum)
+
+      return { ethereum, web3 }
     },
   },
 };
