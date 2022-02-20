@@ -3,24 +3,34 @@
     <v-app-bar
       app
       color="primary"
+      prominent
     >
       <div class="d-flex align-center">
-        <v-img
-          alt="NuCarbit Logo"
-          class="shrink mr-2"
-          contain
-          src="@/assets/full-logo-transparent.png"
-          transition="scale-transition"
-          width="130"
-        />
-      </div>
+        <v-btn to="/" text class="ma-4" width="240px" height="80px">
+          <v-img
+            alt="NuCarbit Logo"
+            class="ma-6"
+            contain
+            src="@/assets/full-logo-transparent.png"
+            width="160px"
+          />
+        </v-btn>
       <v-spacer></v-spacer>
-      <v-btn
-        target="_blank"
-        text
-      >
-        <span class="mr-2">Test</span>
-      </v-btn>
+      <div class="justify-end">
+        <v-btn
+          to="CarbonDataForm"
+          text
+        >
+          <span class="mr-2">Data</span>
+        </v-btn>
+        <v-btn
+          to="AssetCard"
+          text
+        >
+          <span class="mr-2">AssetCard</span>
+        </v-btn>
+      </div>
+      </div>
     </v-app-bar>
     <v-main>
       <router-view/>
@@ -44,7 +54,7 @@
           {{ link }}
         </v-btn>
         <v-col
-          class="brown darken-2 py-4 text-center white--text"
+          class="grey darken-4 py-4 text-center white--text"
           cols="12"
         >
           {{ new Date().getFullYear() }} — <strong>Vuetify</strong>
