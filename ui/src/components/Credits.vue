@@ -1,16 +1,44 @@
 <template>
-  <div>
+  <v-row>
     <v-col class="d-flex flex-wrap">
       <v-btn @click="refresh()"> Refresh </v-btn>
-      <v-card v-for="asset in assetNames" :key="asset">
-        <v-card v-for="prop in asset" :key="prop">
-          <v-card-text>{{ prop }}</v-card-text>
+      <v-expansion-panels multiple>
+        <v-expansion-panel
+        v-for="asset in assetNames"
+        :key="asset.id">
+          <v-expansion-panel-header>Test</v-expansion-panel-header>
+          <v-expansion-panel-content>
+            <v-col cols="6" class="d-inline-flex flex-wrap">
+              <v-list>
+                <v-list-item>ID: {{ asset.id }}</v-list-item>
+                <v-list-item>Evidence: {{ asset.evidence }}</v-list-item>
+                <v-list-item>Nonce: {{ asset.nonce }}</v-list-item>
+              </v-list>
+            </v-col>
+            <v-col cols="6" class="d-inline-flex flex-wrap">
+              <v-list>
+                <v-list-item>Asset Code: {{ asset.value.assetCode }}</v-list-item>
+                <v-list-item>Metadata: {{ asset.value.metadata }}</v-list-item>
+                <v-list-item>Quantity: {{ asset.value.quantity }}</v-list-item>
+                <v-list-item>Security Root: {{ asset.value.securityRoot }}</v-list-item>
+              </v-list>
+            </v-col>
+          </v-expansion-panel-content>
+        </v-expansion-panel>
+      </v-expansion-panels>
+
+
+
+      <!-- <v-card v-for="asset in assetNames" :key="asset.id">
+        {{ asset.evidence }}
+        {{ asset.id }}
+        {{ asset.nonce }}
+        <v-card v-for="prop in asset" :key="prop.id">
+          {{ prop }}
         </v-card>
-        <v-card> </v-card>
-        <v-card> </v-card>
-      </v-card>
+      </v-card> -->
     </v-col>
-  </div>
+  </v-row>
 </template>
 
 <script>

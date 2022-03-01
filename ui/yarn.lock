@@ -1041,10 +1041,10 @@
   dependencies:
     "@mojotech/json-type-validation" "^3.1.0"
 
-"@daml.js/nucarbit-1.0.0@./daml.js/nucarbit-1.0.0/":
-  version "1.11.1"
+"@daml.js/nucarbit-0.1.0@./daml.js/nucarbit-0.1.0/":
+  version "1.18.1"
   dependencies:
-    "@daml.js/d14e08374fc7197d6a0de468c968ae8ba3aadbf9315476fd39071831f5923662" "file:../../../../.cache/yarn/v6/npm-@daml-js-nucarbit-1-0-0-1.11.1-a5d52ab8-c172-47ee-a4b2-212623afdbfe-1645347642492/node_modules/@daml.js/d14e08374fc7197d6a0de468c968ae8ba3aadbf9315476fd39071831f5923662"
+    "@daml.js/d14e08374fc7197d6a0de468c968ae8ba3aadbf9315476fd39071831f5923662" "file:../../../.cache/yarn/v6/npm-@daml-js-nucarbit-0-1-0-1.18.1-cd873ae1-4587-44b7-92ed-96e34a7d2bf4-1646155889347/node_modules/@daml.js/d14e08374fc7197d6a0de468c968ae8ba3aadbf9315476fd39071831f5923662"
     "@mojotech/json-type-validation" "^3.1.0"
 
 "@daml/ledger@^1.6.1":

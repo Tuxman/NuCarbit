@@ -29,18 +29,22 @@
     </v-main>
     <v-footer padless>
       <v-row justify="center" no-gutters>
-        <v-btn
-          v-for="link in links"
-          :key="link"
-          color="white"
-          text
-          rounded
-          class="my-2"
-        >
-          {{ link }}
-        </v-btn>
-        <v-col class="grey darken-4 py-4 text-center white--text" cols="12">
-          {{ new Date().getFullYear() }} — <strong>Vuetify</strong>
+        <v-col class="grey darken-4 py-1 text-center white--text" cols="12">
+          <v-btn
+            v-for="link in links"
+            :key="link.name"
+            :href="link.hyperlink"
+            target="_blank"
+            color="white"
+            text
+            rounded
+            class="my-2"
+          >
+            {{ link.name }}
+          </v-btn>
+        </v-col>
+        <v-col class="grey darken-4 pb-4 text-center white--text" cols="12">
+          {{ new Date().getFullYear() }} — <strong>NuCarbit</strong>
         </v-col>
       </v-row>
     </v-footer>
@@ -54,13 +58,16 @@ import Web3Modal from 'web3modal'
 
 export default {
   name: "App",
-
   components: {
   },
-
   data() {
     return {
-      link: [],
+      links: [
+        {
+          name: 'Github',
+          hyperlink: 'https://github.com/Tuxman/NuCarbit'
+        }
+      ],
       web3: {},
     };
   },
