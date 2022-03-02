@@ -1,7 +1,7 @@
 <template>
   <v-row>
     <v-col class="d-flex flex-wrap">
-      <v-btn @click="refresh()"> Refresh </v-btn>
+      <v-btn @click="refresh()" class="ma-4"> Address: AU9avKWiVVPKyU9LoMqDpduS4knoLDMdPEK54qKDNBpdnAMwQZcS </v-btn>
       <v-expansion-panels multiple>
         <v-expansion-panel
         v-for="asset in assetNames"
@@ -18,7 +18,11 @@
             <v-col cols="6" class="d-inline-flex flex-wrap">
               <v-list>
                 <v-list-item>Asset Code: {{ asset.value.assetCode }}</v-list-item>
-                <v-list-item>Metadata: {{ asset.value.metadata }}</v-list-item>
+                <v-list-item>
+                  <v-btn @click="showMeta">
+                    Metadata: {{ asset.value.metadata }}
+                  </v-btn>
+                </v-list-item>
                 <v-list-item>Quantity: {{ asset.value.quantity }}</v-list-item>
                 <v-list-item>Security Root: {{ asset.value.securityRoot }}</v-list-item>
               </v-list>
@@ -74,6 +78,9 @@ export default {
 
       this.assetNames = boxes
     },
+    showMeta() {
+      
+    }
   },
 };
 </script>
