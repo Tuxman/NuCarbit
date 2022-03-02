@@ -8,39 +8,53 @@
         :key="asset.id">
           <v-expansion-panel-header>Test</v-expansion-panel-header>
           <v-expansion-panel-content>
-            <v-col cols="6" class="d-inline-flex flex-wrap">
+            <v-col cols="4" class="d-inline-flex">
               <v-list>
-                <v-list-item>ID: {{ asset.id }}</v-list-item>
-                <v-list-item>Evidence: {{ asset.evidence }}</v-list-item>
-                <v-list-item>Nonce: {{ asset.nonce }}</v-list-item>
+                <v-list-item>
+                  <p class="font-weight-medium">ID:&nbsp;</p>
+                  <p class="text-body-2">{{ asset.id }}</p>
+                </v-list-item>
+                <v-list-item>
+                  <p class="font-weight-medium">Evidence:&nbsp;</p>
+                  <p class="text-body-2">{{ asset.evidence }}</p>
+                </v-list-item>
+                <v-list-item>
+                  <p class="font-weight-medium">Nonce:&nbsp;</p>
+                  <p class="text-body-2">{{ asset.nonce }}</p>
+                </v-list-item>
               </v-list>
             </v-col>
-            <v-col cols="6" class="d-inline-flex flex-wrap">
+            <v-col cols="4" class="d-inline-flex">
               <v-list>
-                <v-list-item>Asset Code: {{ asset.value.assetCode }}</v-list-item>
                 <v-list-item>
-                  <v-btn @click="showMeta">
-                    Metadata: {{ asset.value.metadata }}
+                  <p class="font-weight-medium">Asset Code: </p>
+                  <p class="text-body-2">{{ asset.value.assetCode }}</p>
+                </v-list-item>
+                <v-list-item>
+                  <v-btn @click="asset.toggleMetaData = !asset.toggleMetaData">
+                    <p class="font-weight-medium">Metadata: </p>
+                    <p class="text-body-2">{{ asset.value.metadata }}</p>
                   </v-btn>
                 </v-list-item>
-                <v-list-item>Quantity: {{ asset.value.quantity }}</v-list-item>
-                <v-list-item>Security Root: {{ asset.value.securityRoot }}</v-list-item>
+                <v-list-item>
+                  <p class="font-weight-medium">Quantity: </p>
+                  <p class="text-body-2">{{ asset.value.quantity }}</p>
+                </v-list-item>
+                <v-list-item>
+                  <p class="font-weight-medium">Security Root: </p>
+                  <p class="text-body-2">{{ asset.value.securityRoot }}</p>
+                </v-list-item>
+              </v-list>
+            </v-col>
+            <v-col cols="4" class="d-inline-flex" v-if="asset.toggleMetaData">
+              <v-list v-show="asset.toggleMetaData">
+                <v-list-item>meta 1</v-list-item>
+                <v-list-item>meta 2</v-list-item>
               </v-list>
             </v-col>
           </v-expansion-panel-content>
         </v-expansion-panel>
       </v-expansion-panels>
-
-
-
-      <!-- <v-card v-for="asset in assetNames" :key="asset.id">
-        {{ asset.evidence }}
-        {{ asset.id }}
-        {{ asset.nonce }}
-        <v-card v-for="prop in asset" :key="prop.id">
-          {{ prop }}
-        </v-card>
-      </v-card> -->
     </v-col>
   </v-row>
 </template>
@@ -62,7 +76,8 @@ export default {
       const boxes = balances.data.result.AU9avKWiVVPKyU9LoMqDpduS4knoLDMdPEK54qKDNBpdnAMwQZcS.Boxes.AssetBox 
 
       console.log(boxes)
-      boxes.map(box => console.log(box))
+      boxes.map(box => 
+      box.toggleMetaData = false)
 
       // const formatted = boxes.map(box => 
       // Object.assign(
@@ -78,8 +93,8 @@ export default {
 
       this.assetNames = boxes
     },
-    showMeta() {
-      
+    showMeta(toggle) {
+      toggle = !toggle
     }
   },
 };
