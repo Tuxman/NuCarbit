@@ -8,49 +8,55 @@
         :key="asset.id">
           <v-expansion-panel-header>Test</v-expansion-panel-header>
           <v-expansion-panel-content>
-            <v-col cols="4" class="d-inline-flex">
-              <v-list>
-                <v-list-item>
-                  <p class="font-weight-medium">ID:&nbsp;</p>
-                  <p class="text-body-2">{{ asset.id }}</p>
-                </v-list-item>
-                <v-list-item>
-                  <p class="font-weight-medium">Evidence:&nbsp;</p>
-                  <p class="text-body-2">{{ asset.evidence }}</p>
-                </v-list-item>
-                <v-list-item>
-                  <p class="font-weight-medium">Nonce:&nbsp;</p>
-                  <p class="text-body-2">{{ asset.nonce }}</p>
-                </v-list-item>
-              </v-list>
+            <v-col xs="12" sm="12" md="12" lg="6" xl="4" class="d-inline-flex mr-n16 pr-n10">
+              <v-card>
+                <v-list>
+                  <v-list-item>
+                    <p class="font-weight-medium">ID:&nbsp;</p>
+                    <p class="text-body-2">{{ asset.id }}</p>
+                  </v-list-item>
+                  <v-list-item>
+                    <p class="font-weight-medium">Evidence:&nbsp;</p>
+                    <p class="text-body-2">{{ asset.evidence }}</p>
+                  </v-list-item>
+                  <v-list-item>
+                    <p class="font-weight-medium">Nonce:&nbsp;</p>
+                    <p class="text-body-2">{{ asset.nonce }}</p>
+                  </v-list-item>
+                </v-list>
+              </v-card>
             </v-col>
-            <v-col cols="4" class="d-inline-flex">
-              <v-list>
-                <v-list-item>
-                  <p class="font-weight-medium">Asset Code: </p>
-                  <p class="text-body-2">{{ asset.value.assetCode }}</p>
-                </v-list-item>
-                <v-list-item>
-                  <v-btn @click="asset.toggleMetaData = !asset.toggleMetaData">
-                    <p class="font-weight-medium">Metadata: </p>
-                    <p class="text-body-2">{{ asset.value.metadata }}</p>
-                  </v-btn>
-                </v-list-item>
-                <v-list-item>
-                  <p class="font-weight-medium">Quantity: </p>
-                  <p class="text-body-2">{{ asset.value.quantity }}</p>
-                </v-list-item>
-                <v-list-item>
-                  <p class="font-weight-medium">Security Root: </p>
-                  <p class="text-body-2">{{ asset.value.securityRoot }}</p>
-                </v-list-item>
-              </v-list>
+            <v-col xs="12" sm="12" md="12" lg="6" xl="4" class="d-inline-flex">
+              <v-card>
+                <v-list>
+                  <v-list-item>
+                    <p class="font-weight-medium">Asset Code: </p>
+                    <p class="text-body-2">{{ asset.value.assetCode }}</p>
+                  </v-list-item>
+                  <v-list-item>
+                    <v-btn @click="asset.toggleMetaData = !asset.toggleMetaData">
+                      <p class="font-weight-medium">Metadata: </p>
+                      <p class="text-body-2">{{ asset.value.metadata }}</p>
+                    </v-btn>
+                  </v-list-item>
+                  <v-list-item>
+                    <p class="font-weight-medium">Quantity: </p>
+                    <p class="text-body-2">{{ asset.value.quantity }}</p>
+                  </v-list-item>
+                  <v-list-item>
+                    <p class="font-weight-medium">Security Root: </p>
+                    <p class="text-body-2">{{ asset.value.securityRoot }}</p>
+                  </v-list-item>
+                </v-list>
+              </v-card>
             </v-col>
-            <v-col cols="4" class="d-inline-flex" v-if="asset.toggleMetaData">
-              <v-list v-show="asset.toggleMetaData">
-                <v-list-item>meta 1</v-list-item>
-                <v-list-item>meta 2</v-list-item>
-              </v-list>
+            <v-col xs="12" sm="12" md="12" xl="4" class="d-inline-flex" v-if="asset.toggleMetaData">
+              <v-card>
+                <v-list v-show="asset.toggleMetaData">
+                  <v-list-item>meta 1</v-list-item>
+                  <v-list-item>meta 2</v-list-item>
+                </v-list>
+              </v-card>
             </v-col>
           </v-expansion-panel-content>
         </v-expansion-panel>
