@@ -61,12 +61,14 @@ app.get('/mint', (req, res) => {
   const address = brambl.keyManager.address
   const assetCode = brambl.createAssetCode('test')
 
+  const metadata = "{'date': '2022-03-04','projectId': '1','projectName': 'Topl','projectDeveloper': 'Nucarbit','projectType': 'Sequestration','methodology': 'DAC','creditsIssued': '1','address': '1234 Anytown','assetState': 'TX','country': 'USA'}"
+
   const rawAssetParams = {
     "propositionType": "PublicKeyCurve25519",
     "recipients": [
       // basic: [address, quantity]
       // advance: [address, quantity, securityRoot, metadata]
-      [address, 1, '11111111111111111111111111111111', 'testData'],
+      [address, 1, '11111111111111111111111111111111', metadata],
     ],
     "assetCode": assetCode,
     "sender": [address],

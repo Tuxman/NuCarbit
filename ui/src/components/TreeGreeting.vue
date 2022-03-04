@@ -3,7 +3,6 @@
     <v-col class="d-flex justify-center">
       <v-card>
         <v-img 
-        :background-size=true
         src="@/assets/tree-background.jpg"
         class="white--text mt-n3 mx-n18">
           <v-row>

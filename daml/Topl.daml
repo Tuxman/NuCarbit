@@ -1,6 +1,6 @@
 module Topl where
 
-template AssetTransaction
+template User
   with
     issuer: Party
     owner: Party
@@ -12,6 +12,20 @@ template AssetTransaction
     controller owner can
 
       nonconsuming MintAsset: AssetId
+        with
+          recipient: Party
+          nonce: Text
+          id: Text
+          evidence: Text
+          quantity: Text
+          assetCode: Text
+          metadata: Text
+          securityRoot: Text
+        do
+          create Asset with issuer, recipient, nonce, id, evidence, quantity, assetCode, metadata, securityRoot
+
+        
+      nonconsuming MintAssetOffChain: AssetId
         with
           recipient: Party
           nonce: Text

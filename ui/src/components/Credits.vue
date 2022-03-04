@@ -6,7 +6,7 @@
         <v-expansion-panel
         v-for="asset in assetNames"
         :key="asset.id">
-          <v-expansion-panel-header>Asset Name: </v-expansion-panel-header>
+          <v-expansion-panel-header>Asset Name: TestAsset</v-expansion-panel-header>
           <v-expansion-panel-content>
             <v-col xs="12" sm="12" md="12" lg="6" xl="4" class="d-inline-flex mr-n16 pr-n10">
               <v-card elevation="4" outlined>
@@ -43,8 +43,7 @@
                     <v-divider></v-divider>
                     <v-list-item class="my-2">
                       <v-btn @click="asset.toggleMetaData = !asset.toggleMetaData">
-                        <span class="font-weight-medium">Metadata:
-                        <span class="text-body-2">{{ asset.value.metadata }}</span></span>
+                        <span class="font-weight-medium">Metadata</span>
                       </v-btn>
                     </v-list-item>
                     <v-divider></v-divider>
@@ -66,8 +65,9 @@
                 <v-card-title class="justify-center">Metadata Properties</v-card-title>
                 <v-card>
                   <v-list v-show="asset.toggleMetaData">
-                    <v-list-item>meta 1</v-list-item>
-                    <v-list-item>meta 2</v-list-item>
+                    <v-list-item class="my-2">
+                      <span class="text-body-2">{{ asset.value.metadata }}</span>
+                    </v-list-item>
                   </v-list>
                 </v-card>
               </v-card>
@@ -86,7 +86,37 @@ export default {
   name: "Credits",
   data() {
     return {
-      assetNames: [],
+      assetNames: [
+        {
+"toggleMetaData": false,
+"nonce": "-8357572620002112241",
+"id": "9nXAVt82sKGfU3dDYAdCLVGuUN7NTbZnoqQgr8x6b3eq",
+"evidence": "LmJU2jCd6pUWNKQgifyxXWw9XnFr2cxxSY57MLqjqM6e",
+"type": "AssetBox",
+"value": {
+	"quantity": "1",
+	"assetCode": "6Lm9dRk8kZqP1ZgKJutmNAmkwZsqKu14JLrtWWcZapuFpZ93vthSVgPPZ9",
+	"metadata": "{'date': '2022-03-04','projectId': '1','projectName': 'Topl','projectDeveloper': 'Nucarbit','projectType': 'Sequestration','methodology': 'DAC','creditsIssued': '1','address': '1234 Anytown','assetState': 'TX','country': 'USA'}",
+	"type": "Asset",
+	"securityRoot": "11111111111111111111111111111111"
+}
+},
+                    {
+                        "toggleMetaData": false,
+                        "nonce": "-7583401972890980652",
+                        "id": "Gj2iycFbt8izV6gT79gH3wxbiV1djoGtkpCaoYphvkzD",
+                        "evidence": "LmJU2jCd6pUWNKQgifyxXWw9XnFr2cxxSY57MLqjqM6e",
+                        "type": "AssetBox",
+                        "value": {
+                            "quantity": "2",
+                            "assetCode": "6Lm9dRk8kZqP1ZgKJutmNAmkwZsqKu14JLrtWWcZapuFpZ93vthSVgPPZ9",
+                            "metadata": "{'date': '2022-03-04','projectId': '1','projectName': 'Topl','projectDeveloper': 'Nucarbit','projectType': 'Sequestration','methodology': 'Tree planting','creditsIssued': '1','address': '1234 Anytown','assetState': 'TX','country': 'USA'}",
+                            "type": "Asset",
+                            "securityRoot": "11111111111111111111111111111111"
+                        }
+                    }
+
+      ],
     };
   },
   methods: {

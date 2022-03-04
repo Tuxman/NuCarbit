@@ -7,11 +7,15 @@ parties:
   - Bob
   - Carol
   - Dave
+  - AU9avKWiVVPKyU9LoMqDpduS4knoLDMdPEK54qKDNBpdnAMwQZcS 
 exposed-modules:
   - Topl
 dependencies:
   - daml-prim
   - daml-stdlib
+sandbox-options:
+- --wall-clock-time
+- --ledgerid=nucarbit-sandbox
 codegen:
   js:
     output-directory: ui/daml.js
