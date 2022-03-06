@@ -89,14 +89,14 @@ export default {
       assetNames: [
         {
 "toggleMetaData": false,
-"nonce": "8357572620002112241",
+"nonce": "-8357572620002112241",
 "id": "9nXAVt82sKGfU3dDYAdCLVGuUN7NTbZnoqQgr8x6b3eq",
 "evidence": "LmJU2jCd6pUWNKQgifyxXWw9XnFr2cxxSY57MLqjqM6e",
 "type": "AssetBox",
 "value": {
 	"quantity": "1",
 	"assetCode": "6Lm9dRk8kZqP1ZgKJutmNAmkwZsqKu14JLrtWWcZapuFpZ93vthSVgPPZ9",
-	"metadata": "{'date': '2022-03-04','projectId': '1','projectName': 'Topl','projectDeveloper': 'Nucarbit','projectType': 'Sequestration','methodology': 'DAC','creditsIssued': '1','address': '1234 Anytown','assetState': 'TX','country': 'USA'}",
+	"metadata":'{"date": "2022-03-04","projectId": "1","projectName": "Topl","projectDeveloper": "Nucarbit","projectType": "Sequestration","methodology": "DAC","creditsIssued": "1","address": "1234 Anytown","assetState": "TX","country": "USA"}',
 	"type": "Asset",
 	"securityRoot": "11111111111111111111111111111111"
 }
@@ -110,7 +110,7 @@ export default {
                         "value": {
                             "quantity": "2",
                             "assetCode": "6Lm9dRk8kZqP1ZgKJutmNAmkwZsqKu14JLrtWWcZapuFpZ93vthSVgPPZ9",
-                            "metadata": "{'date': '2022-03-04','projectId': '1','projectName': 'Topl','projectDeveloper': 'Nucarbit','projectType': 'Sequestration','methodology': 'Tree planting','creditsIssued': '1','address': '1234 Anytown','assetState': 'TX','country': 'USA'}",
+                            "metadata":'{"date": "2022-03-04","projectId": "1","projectName": "Topl","projectDeveloper": "Nucarbit","projectType": "Sequestration","methodology": "Tree planting","creditsIssued": "1","address": "1234 Anytown","assetState": "TX","country": "USA"}',
                             "type": "Asset",
                             "securityRoot": "11111111111111111111111111111111"
                         }
