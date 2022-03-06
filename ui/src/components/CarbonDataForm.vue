@@ -120,7 +120,7 @@ export default {
     },
 
     async mockMint() {
-      this.transaction = await axios.get('http://localhost:8000/mint')
+      // this.transaction = await axios.get('http://localhost:8000/mint')
     },
 
     async createUser(user) {

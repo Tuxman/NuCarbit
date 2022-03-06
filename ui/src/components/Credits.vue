@@ -89,7 +89,7 @@ export default {
       assetNames: [
         {
 "toggleMetaData": false,
-"nonce": "-8357572620002112241",
+"nonce": "8357572620002112241",
 "id": "9nXAVt82sKGfU3dDYAdCLVGuUN7NTbZnoqQgr8x6b3eq",
 "evidence": "LmJU2jCd6pUWNKQgifyxXWw9XnFr2cxxSY57MLqjqM6e",
 "type": "AssetBox",
