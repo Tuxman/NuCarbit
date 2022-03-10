@@ -66,8 +66,10 @@
                 <v-card-title class="justify-center">Metadata Properties</v-card-title>
                 <v-card>
                   <v-list v-show="asset.toggleMetaData">
-                    <v-list-item>meta 1</v-list-item>
-                    <v-list-item>meta 2</v-list-item>
+                    <v-list-item class="my-2">
+                      <span class="font-weight-medium">Date:
+                      <span class="text-body-2">{{ asset.metaData.date }}</span></span>
+                    </v-list-item>
                   </v-list>
                 </v-card>
               </v-card>
@@ -97,7 +99,10 @@ export default {
 
       console.log(boxes)
       boxes.map(box => 
-      box.toggleMetaData = false)
+      box.toggleMetaData = false
+      )
+      boxes.map(box => 
+      box.metaData = {"date": "2022-03-04","projectId": "1","projectName": "Topl","projectDeveloper": "Nucarbit","projectType": "Sequestration","methodology": "DAC","creditsIssued": "1","address": "1234 Anytown","assetState": "TX","country": "USA"})
 
       // const formatted = boxes.map(box => 
       // Object.assign(

@@ -1,79 +1,73 @@
 <template>
   <v-row justify="center">
-    <v-col cols="6">
-      <v-card>
+    <v-col cols="8" lg="6" xl="6">
+      <v-card class="my-6">
         <v-container>
           <v-row justify="center">
-            <v-col cols="10">
-              <span>Where would you like to mint?</span>
-              <v-btn-toggle
-              v-model="toggleChain">
-                <v-btn value="on">On Chain</v-btn>
-                <v-btn value="off">Off Chain</v-btn>
-              </v-btn-toggle>
-              <v-form ref="form" v-show="toggleChain == 'on' || toggleChain == 'off'">
-                <v-text-field label="Project ID">
-                </v-text-field>
-                <v-menu
-                  v-model="carbonData.menu"
-                  :close-on-content-click="false"
-                  :nudge-right="40"
-                  transition="scale-transition"
-                  offset-y
-                  min-width="auto"
-                >
-                  <template v-slot:activator="{ on, attrs }">
+            <v-col cols="12">
+              <v-row justify="center">
+                <v-col>
+                  <v-card-text class="text-center text-h5">Where would you like to mint?</v-card-text>
+                  <v-btn-toggle
+                  v-model="toggleChain">
+                    <v-col v-for="chain in chainOptions" :key="chain">
+                      <v-card>
+                        <v-card-text :class="chain.textClass">
+                          {{ chain.text }}
+                        </v-card-text>
+                        <v-card-actions :class="chain.actionsClass">
+                          <v-btn :value="chain.btnValue">
+                            {{ chain.name }}
+                          </v-btn>
+                        </v-card-actions>
+                      </v-card>
+                    </v-col>
+                  </v-btn-toggle>
+                </v-col>
+              </v-row>
+              <v-row justify="center">
+                <v-col cols="8">
+                  <v-form ref="form" v-show="toggleChain == 'on-chain' || toggleChain == 'off-chain'">
+                    <v-text-field 
+                    label="Project ID"
+                    v-model="carbonData.projectID">
+                    </v-text-field>
+                    <v-menu
+                      v-model="carbonData.menu"
+                      :close-on-content-click="false"
+                      :nudge-right="40"
+                      transition="scale-transition"
+                      offset-y
+                      min-width="auto"
+                    >
+                      <template v-slot:activator="{ on, attrs }">
+                        <v-text-field
+                          v-model="carbonData.date"
+                          label="Issuance Date"
+                          prepend-icon="mdi-calendar"
+                          readonly
+                          v-bind="attrs"
+                          v-on="on"
+                        ></v-text-field>
+                      </template>
+                      <v-date-picker
+                        v-model="carbonData.date"
+                        @input="carbonData.menu = false"
+                        scrollable
+                      ></v-date-picker>
+                    </v-menu>
                     <v-text-field
-                      v-model="carbonData.date"
-                      label="Issuance Date"
-                      prepend-icon="mdi-calendar"
-                      readonly
-                      v-bind="attrs"
-                      v-on="on"
+                    v-for="field in textFields"
+                    :key="field"
+                    :label="field.label"
+                    :v-model="field.model"
                     ></v-text-field>
-                  </template>
-                  <v-date-picker
-                    v-model="carbonData.date"
-                    @input="carbonData.menu = false"
-                    scrollable
-                  ></v-date-picker>
-                </v-menu>
-                <v-text-field
-                label="Name of Project"
-                v-model="carbonData.projectName"
-                ></v-text-field>
-                <v-text-field 
-                label="Project Developer or Assembler"
-                v-model="carbonData.projectDeveloper"
-                ></v-text-field>
-                <v-text-field 
-                label="Project Type"
-                v-model="carbonData.projectType"
-                ></v-text-field>
-                <v-text-field 
-                label="Methodology"
-                v-model="carbonData.methodology"
-                ></v-text-field>
-                <v-text-field 
-                label="Total Carbon Credits Issued"
-                v-model="carbonData.creditsIssued"
-                ></v-text-field>
-                <v-text-field 
-                label="Location (Address, City/Town)"
-                v-model="carbonData.address"
-                ></v-text-field>
-                <v-text-field 
-                label="State/Province"
-                v-model="carbonData.state"
-                ></v-text-field>
-                <v-text-field 
-                label="Country"
-                v-model="carbonData.country"
-                ></v-text-field>
-                <v-btn @click="mockMint()">
-                  mint
-                </v-btn>
-              </v-form>
+                    <v-btn @click="mockMint()">
+                      mint {{ toggleChain }}
+                    </v-btn>
+                  </v-form>
+                </v-col>
+              </v-row>
             </v-col>
           </v-row>
         </v-container>
@@ -92,7 +86,57 @@ export default {
       // radioDateGroup: 'year'
       carbonData: Object.assign(this.carbonDataObj),
       transaction: '',
-      toggleChain: ''
+      toggleChain: '',
+      chainOptions: [
+        {
+          name: 'Off-Chain',
+          textClass: 'text-center',
+          text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur placerat eros magna, nec interdum ligula sollicitudin sed. Duis ut ornare odio. Suspendisse sagittis sit amet erat a mattis. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia.',
+          actionsClass: 'justify-center',
+          btnValue: 'off-chain'
+        },
+        {
+          name: 'On-Chain',
+          textClass: 'text-center',
+          text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur placerat eros magna, nec interdum ligula sollicitudin sed. Duis ut ornare odio. Suspendisse sagittis sit amet erat a mattis. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia.',
+          actionsClass: 'justify-center',
+          btnValue: 'on-chain'
+        }
+      ],
+      textFields: [
+        {
+          label: 'Name of Project',
+          model: 'carbonData.projectName'
+        },
+        {
+          label: 'Project Developer or Assembler',
+          model: 'carbonData.projectDeveloper'
+        },
+        {
+          label: 'Project Type',
+          model: 'carbonData.projectType'
+        },
+        {
+          label: 'Methodology',
+          model: 'carbonData.methodology'
+        },
+        {
+          label: 'Total Carbon Credits Issued',
+          model: 'carbonData.creditsIssued'
+        },
+        {
+          label: 'Location (Address, City/Town)',
+          model: 'carbonData.address'
+        },
+        {
+          label: 'State/Province',
+          model: 'carbonData.assetState'
+        },
+        {
+          label: 'Country',
+          model: 'carbonData.country'
+        },
+      ]
     }
   },
   methods: {
@@ -120,6 +164,7 @@ export default {
   beforeCreate() {
     this.carbonDataObj = {
       menu: false,
+      projectID: '',
       date: (new Date(Date.now() - (new Date()).getTimezoneOffset() * 60000)).toISOString().substr(0, 10),
       projectName: '',
       projectDeveloper: '',

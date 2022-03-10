@@ -1,4 +1,4 @@
-# o-beer
+# NuCarbit
 
 ## Project setup
 ```
