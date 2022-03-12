@@ -10,7 +10,7 @@
                   <v-card-text class="text-center text-h5">Where would you like to mint?</v-card-text>
                   <v-btn-toggle
                   v-model="toggleChain">
-                    <v-col v-for="chain in chainOptions" :key="chain">
+                    <v-col v-for="chain in chainOptions" :key="chain.id">
                       <v-card>
                         <v-card-text :class="chain.textClass">
                           {{ chain.text }}
@@ -58,7 +58,7 @@
                     </v-menu>
                     <v-text-field
                     v-for="field in textFields"
-                    :key="field"
+                    :key="field.id"
                     :label="field.label"
                     :v-model="field.model"
                     ></v-text-field>
@@ -140,19 +140,6 @@ export default {
     }
   },
   methods: {
-    // mint(date, projectName, projectDeveloper, projectType, methodology, creditsIssued, address, assetState, country) {
-    //   this.$store.dispatch('mint', {
-    //     date: date,
-    //     projectName: projectName,
-    //     projectDeveloper: projectDeveloper,
-    //     projectType: projectType,
-    //     methodology: methodology,
-    //     creditsIssued: creditsIssued,
-    //     address: address,
-    //     assetState: assetState,
-    //     country: country
-    //   })
-    // }
     mintData(carbonData) {
       this.$store.commit('mint', carbonData)
     },

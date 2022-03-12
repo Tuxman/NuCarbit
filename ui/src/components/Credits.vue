@@ -2,74 +2,64 @@
   <v-row justify="center">
     <v-col class="d-flex flex-wrap">
       <v-btn @click="refresh()" class="ma-4"> Address: AU9avKWiVVPKyU9LoMqDpduS4knoLDMdPEK54qKDNBpdnAMwQZcS </v-btn>
-      <v-expansion-panels multiple class="mx-4">
+      <v-expansion-panels multiple class="ma-4">
         <v-expansion-panel
         v-for="asset in assetNames"
         :key="asset.id">
           <v-expansion-panel-header>Asset Name: </v-expansion-panel-header>
           <v-expansion-panel-content>
-            <v-col xs="12" sm="12" md="12" lg="6" xl="4" class="d-inline-flex mr-n16 pr-n10">
-              <v-card elevation="4" outlined>
+            <v-col cols="12" lg="6" xl="4" class="d-inline-flex">
+              <v-card elevation="4" outlined min-width="552px">
                 <v-card-title class="justify-center">Blockchain Data</v-card-title>
                 <v-card>
                   <v-list>
-                    <v-list-item class="my-2">
-                      <span class="font-weight-medium">ID:
-                      <span class="text-body-2">{{ asset.id }}</span></span>
-                    </v-list-item>
-                    <v-divider></v-divider>
-                    <v-list-item class="my-2">
-                      <span class="font-weight-medium">Evidence:
-                      <span class="text-body-2">{{ asset.evidence }}</span></span>
-                    </v-list-item>
-                    <v-divider></v-divider>
-                    <v-list-item class="my-2">
-                      <span class="font-weight-medium">Nonce:
-                      <span class="text-body-2">{{ asset.nonce }}</span></span>
-                    </v-list-item>
+                    <div v-for="(item, index) in listOne" :key="index">
+                      <v-list-item>
+                        <span class="font-weight-medium text-body-2">{{ item.title }}
+                        <span class="caption">{{ asset[item.text] }}</span></span>
+                      </v-list-item>
+                      <v-divider v-if="index != listOne.length - 1"></v-divider>
+                    </div>
                   </v-list>
                 </v-card>
               </v-card>
             </v-col>
-            <v-col xs="12" sm="12" md="12" lg="6" xl="4" class="d-inline-flex">
-              <v-card elevation="4" outlined>
+            <v-col cols="12" lg="6" xl="4" class="d-inline-flex">
+              <v-card elevation="4" outlined min-width="552px">
                 <v-card-title class="justify-center">Asset Properties</v-card-title>
                 <v-card>
                   <v-list>
-                    <v-list-item class="my-2">
-                      <span class="font-weight-medium">Asset Code:
-                      <span class="text-body-2">{{ asset.value.assetCode }}</span></span>
-                    </v-list-item>
-                    <v-divider></v-divider>
-                    <v-list-item class="my-2">
+                    <div v-for="(item, index) in listTwo" :key="index">
+                      <v-list-item>
+                        <span class="font-weight-medium text-body-2">{{ item.title }}
+                        <span class="caption">{{ asset.value[item.text] }}</span></span>
+                      </v-list-item>
+                      <v-divider></v-divider>
+                    </div>
+                    <v-list-item>
                       <v-btn @click="asset.toggleMetaData = !asset.toggleMetaData">
-                        <span class="font-weight-medium">Metadata:
-                        <span class="text-body-2">{{ asset.value.metadata }}</span></span>
+                        <span class="font-weight-medium text-body-2">Metadata:
+                        <span class="caption">{{ asset.value.metadata }}</span></span>
                       </v-btn>
-                    </v-list-item>
-                    <v-divider></v-divider>
-                    <v-list-item class="my-2">
-                      <span class="font-weight-medium">Quantity:
-                      <span class="text-body-2">{{ asset.value.quantity }}</span></span>
-                    </v-list-item>
-                    <v-divider></v-divider>
-                    <v-list-item class="my-2">
-                      <span class="font-weight-medium">Security Root:
-                      <span class="text-body-2">{{ asset.value.securityRoot }}</span></span>
                     </v-list-item>
                   </v-list>
                 </v-card>
               </v-card>
             </v-col>
-            <v-col xs="12" sm="12" md="12" xl="4" class="d-inline-flex" v-if="asset.toggleMetaData">
-              <v-card elevation="4" outlined>
+            <v-col cols="12" lg="6" xl="4" class="d-inline-flex" v-if="asset.toggleMetaData">
+              <v-card elevation="4" outlined min-width="552px">
                 <v-card-title class="justify-center">Metadata Properties</v-card-title>
-                <v-card>
+                <v-card class="scroll" max-height="211px">
                   <v-list v-show="asset.toggleMetaData">
-                    <v-list-item class="my-2">
-                      <span class="font-weight-medium">Date:
-                      <span class="text-body-2">{{ asset.metaData.date }}</span></span>
-                    </v-list-item>
+                    <div v-for="(item, index) in listThree" :key="index">
+                      <v-list-item>
+                        <span class="font-weight-medium text-body-2">{{ item.title }}
+                        <span class="caption">{{ asset.metaData[item.text] }}</span></span>
+                        <v-spacer></v-spacer>
+                        <v-btn>Verify</v-btn>
+                      </v-list-item>
+                      <v-divider v-if="index != listThree.length - 1"></v-divider>
+                    </div>
                   </v-list>
                 </v-card>
               </v-card>
@@ -89,6 +79,80 @@ export default {
   data() {
     return {
       assetNames: [],
+      listOne: [
+        {
+          title: 'ID: ',
+          text: 'id'
+        },
+        {
+          title: 'Evidence: ',
+          text: 'evidence'
+        },
+        {
+          title: 'Nonce: ',
+          text: 'nonce'
+        },
+        {
+          title: '',
+          text: ''
+        }
+      ],
+      listTwo: [
+        {
+          title: 'Asset Code: ',
+          text: 'assetCode'
+        },
+        {
+          title: 'Quantity: ',
+          text: 'quantity'
+        },
+        {
+          title: 'Security Root: ',
+          text: 'securityRoot'
+        }
+      ],
+      listThree: [
+        {
+          title: 'Date: ',
+          text: 'date'
+        },
+        {
+          title: 'Project ID: ',
+          text: 'projectId'
+        },
+        {
+          title: 'Project Name: ',
+          text: 'projectName'
+        },
+        {
+          title: 'Project Developer: ',
+          text: 'projectDeveloper'
+        },
+        {
+          title: 'Project Type: ',
+          text: 'projectType'
+        },
+        {
+          title: 'Methodology: ',
+          text: 'methodology'
+        },
+        {
+          title: 'Credits Issued: ',
+          text: 'creditsIssued'
+        },
+        {
+          title: 'Address: ',
+          text: 'address'
+        },
+        {
+          title: 'State: ',
+          text: 'assetState'
+        },
+        {
+          title: 'Country: ',
+          text: 'country'
+        },
+      ]
     };
   },
   methods: {
@@ -102,25 +166,17 @@ export default {
       box.toggleMetaData = false
       )
       boxes.map(box => 
-      box.metaData = {"date": "2022-03-04","projectId": "1","projectName": "Topl","projectDeveloper": "Nucarbit","projectType": "Sequestration","methodology": "DAC","creditsIssued": "1","address": "1234 Anytown","assetState": "TX","country": "USA"})
-
-      // const formatted = boxes.map(box => 
-      // Object.assign(
-      //   {},
-      //   ...(function _flatten(o) {
-      //     return [].concat(
-      //       ...Object.keys(o).map((k) =>
-      //         typeof o[k] === "object" ? _flatten(o[k]) : { [k]: o[k] }
-      //       )
-      //     );
-      //   })(box)
-      // ))
+      box.metaData = {"date": "2022-03-04","projectId": "1","projectName": "Topl","projectDeveloper": "NuCarbit","projectType": "Sequestration","methodology": "DAC","creditsIssued": "1","address": "1234 Anytown","assetState": "TX","country": "USA"})
 
       this.assetNames = boxes
     },
-    showMeta(toggle) {
-      toggle = !toggle
-    }
   },
 };
 </script>
+
+<style>
+.scroll {
+  overflow-y: scroll
+}
+
+</style>
