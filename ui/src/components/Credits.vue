@@ -64,6 +64,14 @@
                 </v-card>
               </v-card>
             </v-col>
+            <v-col cols="12" lg="6" xl="4" class="d-inline-flex">
+              <v-card elevation="4" outlined min-width="552px">
+                <v-card-title class="justify-center">Metadata Proof</v-card-title>
+                <v-card min-height="211px">
+
+                </v-card>
+              </v-card>
+            </v-col>
           </v-expansion-panel-content>
         </v-expansion-panel>
       </v-expansion-panels>

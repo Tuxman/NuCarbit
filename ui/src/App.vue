@@ -1,41 +1,40 @@
 <template>
-  <v-app color="#FEFAE0">
+  <v-app>
     <v-app-bar app color="primary" prominent>
-      <div class="d-flex align-center">
-        <v-btn to="/" text class="ma-4" width="240px" height="80px">
-          <v-img
-            alt="NuCarbit Logo"
-            class="ma-6"
-            contain
-            src="@/assets/full-logo-transparent.png"
-            width="160px"
-          />
-        </v-btn>
+      <v-col class="d-inline-flex align-end">
+        <div>
+          <v-btn to="/" text class="ma-2" width="240px" height="80px">
+            <v-img
+              alt="NuCarbit Logo"
+              class="ma-6"
+              src="@/assets/logo-full-white-text.png"
+              width="160px"
+            ></v-img>
+          </v-btn>
+        </div>
         <v-spacer></v-spacer>
         <div>
           <v-btn to="CarbonDataForm" text>
-            <span class="mr-2">Data</span>
+            <span class="mr-2 white--text">Data</span>
           </v-btn>
           <v-btn to="credits" text>
-            <span class="mr-2">Credits</span>
+            <span class="mr-2 white--text">Credits</span>
           </v-btn>
-          <!-- <Connect /> -->
-          <v-btn text @click="connect()"> Connect </v-btn>
+          <v-btn text @click="connect()" class="white--text">Connect</v-btn>
         </div>
-      </div>
+      </v-col>
     </v-app-bar>
     <v-main>
       <router-view />
     </v-main>
-    <v-footer padless>
+    <v-footer padless color="footer">
       <v-row justify="center" no-gutters>
-        <v-col class="grey darken-4 py-1 text-center white--text" cols="12">
+        <v-col class="py-1 text-center" cols="12">
           <v-btn
-            v-for="link in links"
+            v-for="link in footerLinks"
             :key="link.name"
             :href="link.hyperlink"
             target="_blank"
-            color="white"
             text
             rounded
             class="my-2"
@@ -43,7 +42,7 @@
             {{ link.name }}
           </v-btn>
         </v-col>
-        <v-col class="grey darken-4 pb-4 text-center white--text" cols="12">
+        <v-col class="pb-4 text-center" cols="12">
           {{ new Date().getFullYear() }} — <strong>NuCarbit</strong>
         </v-col>
       </v-row>
@@ -62,7 +61,21 @@ export default {
   },
   data() {
     return {
-      links: [
+      headerLinks: [
+        {
+          name: 'Data',
+          hyperlink: ''  
+        },
+        {
+          name: 'Credits',
+          hyperlink: ''  
+        },
+        {
+          name: 'Connect',
+          hyperlink: ''  
+        },
+      ],
+      footerLinks: [
         {
           name: 'Github',
           hyperlink: 'https://github.com/Tuxman/NuCarbit'
