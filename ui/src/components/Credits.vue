@@ -1,14 +1,14 @@
 <template>
   <v-row justify="center">
-    <v-col class="d-flex flex-wrap">
-      <v-btn @click="refresh()" class="ma-4"> Address: AU9avKWiVVPKyU9LoMqDpduS4knoLDMdPEK54qKDNBpdnAMwQZcS </v-btn>
+    <v-col class="d-flex flex-wrap" cols="8">
+      <v-btn @click="refresh()" class="ma-4 mt-6"> Address: AU9avKWiVVPKyU9LoMqDpduS4knoLDMdPEK54qKDNBpdnAMwQZcS </v-btn>
       <v-expansion-panels multiple class="ma-4">
         <v-expansion-panel
         v-for="asset in assetNames"
         :key="asset.id">
           <v-expansion-panel-header>Asset Name: </v-expansion-panel-header>
           <v-expansion-panel-content>
-            <v-col cols="12" lg="6" xl="4" class="d-inline-flex">
+            <v-col cols="12" xl="6" class="d-inline-flex justify-center">
               <v-card elevation="4" outlined min-width="552px">
                 <v-card-title class="justify-center">Blockchain Data</v-card-title>
                 <v-card>
@@ -24,7 +24,7 @@
                 </v-card>
               </v-card>
             </v-col>
-            <v-col cols="12" lg="6" xl="4" class="d-inline-flex">
+            <v-col cols="12" xl="6" class="d-inline-flex justify-center">
               <v-card elevation="4" outlined min-width="552px">
                 <v-card-title class="justify-center">Asset Properties</v-card-title>
                 <v-card>
@@ -46,7 +46,7 @@
                 </v-card>
               </v-card>
             </v-col>
-            <v-col cols="12" lg="6" xl="4" class="d-inline-flex" v-if="asset.toggleMetaData">
+            <v-col cols="12" xl="6" class="d-inline-flex justify-center" v-if="asset.toggleMetaData">
               <v-card elevation="4" outlined min-width="552px">
                 <v-card-title class="justify-center">Metadata Properties</v-card-title>
                 <v-card class="scroll" max-height="211px">
@@ -64,8 +64,8 @@
                 </v-card>
               </v-card>
             </v-col>
-            <v-col cols="12" lg="6" xl="4" class="d-inline-flex">
-              <v-card elevation="4" outlined min-width="552px">
+            <v-col cols="12" xl="6" class="d-inline-flex justify-center">
+              <v-card elevation="4" outlined min-width="552px" v-show="asset.toggleMetaData">
                 <v-card-title class="justify-center">Metadata Proof</v-card-title>
                 <v-card min-height="211px">
 
